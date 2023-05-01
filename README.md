@@ -1,1 +1,1 @@
-# artificial-intelligence
+# Graph Neural Networks
