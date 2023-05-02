@@ -1,13 +1,21 @@
 # Graph Neural Networks
 
 ## 1、入门
+
+### 1.1、图论
 - [图论基础](https://zhuanlan.zhihu.com/p/543187296)
+- [《Introduction to Graph Theory》.Robin J. Wilson]()
+
+### 1.2、图神经网络
 - [A Gentle Introduction to Graph Neural Networks](https://distill.pub/2021/gnn-intro/)
 - [GNN从入门到精通](https://www.bilibili.com/video/BV1K5411H7EQ/?p=1&vd_source=26c583b46dbb1b1b34ae4743b60cf76f)
-- [相关论文代码（百度网盘）](https://pan.baidu.com/s/1WG0fd2ue0UCFAFhnr-RaJw?pwd=918w)  //918w
 
 - [《深入浅出图神经网络》.刘忠雨]()
 - [《图神经网络：基础、前言与应用》]()
+
+### 1.3、论文 + 代码
+- [相关论文代码（百度网盘）](https://pan.baidu.com/s/1WG0fd2ue0UCFAFhnr-RaJw?pwd=918w)  
+  //918w
 
 ## 2、综述
 - [1901.A Comprehensive Survey on Graph Neural Networks](https://arxiv.org/abs/1901.00596)
@@ -34,10 +42,10 @@
 
 ### 3.3、GCN + GraphSAGE + GAT
 - [1609.Semi-supervised classification with graph convolutional networks](https://arxiv.org/pdf/1609.02907.pdf)  
-  //https://zhuanlan.zhihu.com/p/78624225
+  //https://zhuanlan.zhihu.com/p/78624225  
   //https://www.bilibili.com/video/BV1Vw411R7Fj?p=1
 - [1706.Inductive Representation Learning on Large Graphs](https://arxiv.org/pdf/1706.02216.pdf)
 - [1710.Graph Attention Networks](https://arxiv.org/pdf/1710.10903.pdf)  
 
   //https://mp.weixin.qq.com/s?__biz=MzI4MDYzNzg4Mw==&mid=2247517133&idx=5&sn=a5e61d3e333c70b9fe53deaa1d97b79e&chksm=ebb7bb19dcc0320f0fba94e4849c6259a8d759c6d4beb40ef10bbfa8cc1c289b0f4306bd5fc5&scene=27
-  
+
