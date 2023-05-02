@@ -14,7 +14,8 @@
 
 ### 3.1、word2vec
 - [1301.Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf)
-- [1411.word2vec Parameter Learning Explained](https://arxiv.org/pdf/1411.2738.pdf)  //https://zhuanlan.zhihu.com/p/53425736
+- [1411.word2vec Parameter Learning Explained](https://arxiv.org/pdf/1411.2738.pdf)  
+  //https://zhuanlan.zhihu.com/p/53425736  
   //https://jalammar.github.io/illustrated-word2vec/
 
 ### 3.2、walks
@@ -25,7 +26,7 @@
 - [1607.node2vec: Scalable Feature Learning for Networks](https://arxiv.org/pdf/1607.00653.pdf)  
   //https://blog.csdn.net/u012151283/article/details/87081272  
   //https://zhuanlan.zhihu.com/p/344839298
-- [1704.struc2vec: Learning Node Representations from Structural Identity](https://arxiv.org/pdf/1704.03165.pdf)
+- [1704.struc2vec: Learning Node Representations from Structural Identity](https://arxiv.org/pdf/1704.03165.pdf)  
   //https://zhuanlan.zhihu.com/p/162177874
 
 ### 3.3、GCN + GraphSAGE + GAT
