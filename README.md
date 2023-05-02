@@ -23,7 +23,7 @@
 - [1503.LINE: Large-scale Information Network Embedding](https://arxiv.org/pdf/1503.03578.pdf)  
   //https://blog.csdn.net/weixin_44225182/article/details/125311404
 - [1607.node2vec: Scalable Feature Learning for Networks](https://arxiv.org/pdf/1607.00653.pdf)  
-  //https://blog.csdn.net/u012151283/article/details/87081272
+  //https://blog.csdn.net/u012151283/article/details/87081272  
   //https://zhuanlan.zhihu.com/p/344839298
 - [1704.struc2vec: Learning Node Representations from Structural Identity](https://arxiv.org/pdf/1704.03165.pdf)
   //https://zhuanlan.zhihu.com/p/162177874
