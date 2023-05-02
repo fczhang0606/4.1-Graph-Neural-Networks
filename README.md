@@ -6,6 +6,9 @@
 - [GNN从入门到精通](https://www.bilibili.com/video/BV1K5411H7EQ/?p=1&vd_source=26c583b46dbb1b1b34ae4743b60cf76f)
 - [相关论文代码（百度网盘）](https://pan.baidu.com/s/1WG0fd2ue0UCFAFhnr-RaJw?pwd=918w)  //918w
 
+- [《深入浅出图神经网络》.刘忠雨]()
+- [《图神经网络：基础、前言与应用》]()
+
 ## 2、综述
 - [1901.A Comprehensive Survey on Graph Neural Networks](https://arxiv.org/abs/1901.00596)
 - [2101.Graph neural networks: A review of methods and applications](https://sci-hub.st/https://doi.org/10.1016/j.aiopen.2021.01.001)
