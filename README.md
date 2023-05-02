@@ -13,9 +13,10 @@
 - [《深入浅出图神经网络》.刘忠雨]()
 - [《图神经网络：基础、前言与应用》]()
 
-### 1.3、论文 + 代码
+### 1.3、论文 + 软件 + 代码
 - [相关论文代码（百度网盘）](https://pan.baidu.com/s/1WG0fd2ue0UCFAFhnr-RaJw?pwd=918w)  
   //918w
+- [networkX](https://networkx.org/documentation/stable/tutorial.html)
 
 ## 2、综述
 - [1901.A Comprehensive Survey on Graph Neural Networks](https://arxiv.org/abs/1901.00596)
