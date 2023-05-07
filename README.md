@@ -3,8 +3,9 @@
 ## 1、入门
 
 ### 1.1、图论
-- [图论基础](https://zhuanlan.zhihu.com/p/543187296)
 - [《Introduction to Graph Theory》.Robin J. Wilson]()
+- [参考链接]()  
+  //图论基础: https://zhuanlan.zhihu.com/p/543187296
 
 ### 1.2、图神经网络
 - [A Gentle Introduction to Graph Neural Networks](https://distill.pub/2021/gnn-intro/)
