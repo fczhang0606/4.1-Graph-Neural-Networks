@@ -17,6 +17,7 @@
 - [相关论文代码（百度网盘）](https://pan.baidu.com/s/1WG0fd2ue0UCFAFhnr-RaJw?pwd=918w)  
   //918w
 - [networkX](https://networkx.org/documentation/stable/tutorial.html)
+- [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/index.html)
 - [Tutorial Graph Neural Networks on Social Networks](https://www.kaggle.com/code/awadelrahman/tutorial-graph-neural-networks-on-social-networks/notebook)
 
 ## 2、综述
