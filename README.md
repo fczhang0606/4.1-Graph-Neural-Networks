@@ -29,9 +29,7 @@
 
 ### 3.1、word2vec
 - [1301.Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf)
-- [1411.word2vec Parameter Learning Explained](https://arxiv.org/pdf/1411.2738.pdf)  
-  //https://zhuanlan.zhihu.com/p/53425736  
-  //https://jalammar.github.io/illustrated-word2vec/
+- [1411.word2vec Parameter Learning Explained](https://arxiv.org/pdf/1411.2738.pdf)
 
 ### 3.2、walks
 - [1403.DeepWalk: Online Learning of Social Representations](https://arxiv.org/pdf/1403.6652.pdf)  
