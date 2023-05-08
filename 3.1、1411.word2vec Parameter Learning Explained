@@ -1,8 +1,10 @@
 Continuous Bag-of-Word Model
+        根据上下文词汇预测中心词汇
         encoder:        编码，V维降维到N维
         decoder:        拟合概率分布
 
 Skip-Gram Model
+        根据中心词汇预测上下文词汇
 
 优化手段
         Hierarchical Softmax
