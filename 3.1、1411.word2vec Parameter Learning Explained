@@ -1,7 +1,5 @@
 Continuous Bag-of-Word Model
         根据上下文词汇预测中心词汇
-        encoder:        编码，V维降维到N维
-        decoder:        拟合概率分布
 
 Skip-Gram Model
         根据中心词汇预测上下文词汇
@@ -9,3 +7,5 @@ Skip-Gram Model
 优化手段
         Hierarchical Softmax
         Negative Sampling
+
+https://www.bilibili.com/video/BV1Lb411p7FD?p=1&vd_source=26c583b46dbb1b1b34ae4743b60cf76f
