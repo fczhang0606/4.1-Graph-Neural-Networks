@@ -33,8 +33,7 @@
 - [1411.word2vec Parameter Learning Explained](https://arxiv.org/pdf/1411.2738.pdf)
 
 ### 3.2、walks
-- [1403.DeepWalk: Online Learning of Social Representations](https://arxiv.org/pdf/1403.6652.pdf)  
-  //https://zhuanlan.zhihu.com/p/45167021
+- [1403.DeepWalk: Online Learning of Social Representations](https://arxiv.org/pdf/1403.6652.pdf)
 - [1503.LINE: Large-scale Information Network Embedding](https://arxiv.org/pdf/1503.03578.pdf)  
   //https://blog.csdn.net/weixin_44225182/article/details/125311404
 - [1607.node2vec: Scalable Feature Learning for Networks](https://arxiv.org/pdf/1607.00653.pdf)  
