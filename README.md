@@ -29,6 +29,7 @@
 
 ### 3.1、word2vec
 - [1301.Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf)
+- [1310.Distributed Representations of Words and Phrases and their Compositionality](https://arxiv.org/pdf/1310.4546.pdf)
 - [1411.word2vec Parameter Learning Explained](https://arxiv.org/pdf/1411.2738.pdf)
 
 ### 3.2、walks
