@@ -1,1 +1,108 @@
+论文阅读：
 https://www.bilibili.com/video/BV1pW4y1z7pb/?spm_id_from=333.788&vd_source=26c583b46dbb1b1b34ae4743b60cf76f
+
+
+
+实战环境：
+################################################################################################################################
+conda create -n GNN_DeepWalk
+conda activate GNN_DeepWalk
+
+conda install python=3.8
+
+https://pytorch.org/get-started/previous-versions/
+conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=11.1 -c pytorch -c conda-forge
+################################################################################################################################
+conda install ipykernel
+conda install platformdirs
+pip3 install ipywidgets
+pip3 install --upgrade jupyter_core jupyter_client
+################################################################################################################################
+(sudo python -m ipykernel install --name XXX)
+################################################################################################################################
+pip install networkx
+pip install karateclub
+################################################################################################################################
+
+
+
+实战代码：
+1\Deep Walk in karateclub
+
+import networkx as nx
+from karateclub import DeepWalk
+from sklearn.cluster import KMeans
+
+G = nx.karate_club_graph() 
+G.nodes[1], G.nodes[23]
+
+model = DeepWalk()
+model.fit(G)
+
+G_embedding = model.get_embedding()
+G_embedding.shape
+
+num_coms = 2
+clusters = KMeans(n_clusters=num_coms).fit_predict(G_embedding)
+print(clusters)
+
+2\Deep Walk
+
+import torch
+import torch.nn as nn
+import random
+
+adj_list = [[1,2,3], [0,2,3], [0, 1, 3], [0, 1, 2], [5, 6], [4,6], [4, 5], [1, 3]]
+size_vertex = len(adj_list)
+
+w=3            # window size
+d=2            # embedding size
+y=200          # walks per vertex
+t=6            # walk length 
+lr=0.025       # learning rate
+v=[0,1,2,3,4,5,6,7] # labels of available vertices
+################################################################################################################################
+def RandomWalk(node,t):
+    walk = [node]        # Walk starts from this node
+    
+    for i in range(t-1):
+        node = adj_list[node][random.randint(0,len(adj_list[node])-1)]
+        walk.append(node)
+
+    return walk
+################################################################################################################################
+class Model(torch.nn.Module):
+    def __init__(self):
+        super(Model, self).__init__()
+        self.phi  = nn.Parameter(torch.rand((size_vertex, d), requires_grad=True))    
+        self.phi2 = nn.Parameter(torch.rand((d, size_vertex), requires_grad=True))
+        
+        
+    def forward(self, one_hot):
+        hidden = torch.matmul(one_hot, self.phi)
+        out    = torch.matmul(hidden, self.phi2)
+        return out
+################################################################################################################################
+def skip_gram(wvi,  w):
+    for j in range(len(wvi)):
+        for k in range(max(0,j-w) , min(j+w, len(wvi))):
+            
+            #generate one hot vector
+            one_hot          = torch.zeros(size_vertex)
+            one_hot[wvi[j]]  = 1
+            
+            out              = model(one_hot)
+            loss             = torch.log(torch.sum(torch.exp(out))) - out[wvi[k]]
+            loss.backward()
+            
+            for param in model.parameters():
+                param.data.sub_(lr*param.grad)
+                param.grad.data.zero_()
+################################################################################################################################
+model = Model()
+for i in range(y):
+    random.shuffle(v)
+    for vi in v:
+        wvi=RandomWalk(vi,t)
+        skip_gram(wvi, w)
+print(model.phi)
