@@ -46,7 +46,9 @@ num_coms = 2
 clusters = KMeans(n_clusters=num_coms).fit_predict(G_embedding)
 print(clusters)
 
-2\Deep Walk
+
+
+2\ZZ's Deep Walk
 
 import torch
 import torch.nn as nn
@@ -106,3 +108,8 @@ for i in range(y):
         wvi=RandomWalk(vi,t)
         skip_gram(wvi, w)
 print(model.phi)
+
+
+
+3\Wiki
+https://www.bilibili.com/video/BV1et4y187Gd/?spm_id_from=333.788&vd_source=26c583b46dbb1b1b34ae4743b60cf76f
