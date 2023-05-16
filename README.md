@@ -10,6 +10,7 @@
 ### 1.2、图神经网络
 - [A Gentle Introduction to Graph Neural Networks](https://distill.pub/2021/gnn-intro/)
 - [GNN从入门到精通](https://www.bilibili.com/video/BV1K5411H7EQ/?p=1&vd_source=26c583b46dbb1b1b34ae4743b60cf76f)
+- [Stanford CS224W]
 
 - [《深入浅出图神经网络》.刘忠雨]
 - [《图神经网络：基础、前言与应用》]
