@@ -3,16 +3,16 @@
 ## 1、入门
 
 ### 1.1、图论
-- [《Introduction to Graph Theory》.Robin J. Wilson]()
-- [参考链接]()  
+- [《Introduction to Graph Theory》.Robin J. Wilson]
+- [参考链接]
   //图论基础: https://zhuanlan.zhihu.com/p/543187296
 
 ### 1.2、图神经网络
 - [A Gentle Introduction to Graph Neural Networks](https://distill.pub/2021/gnn-intro/)
 - [GNN从入门到精通](https://www.bilibili.com/video/BV1K5411H7EQ/?p=1&vd_source=26c583b46dbb1b1b34ae4743b60cf76f)
 
-- [《深入浅出图神经网络》.刘忠雨]()
-- [《图神经网络：基础、前言与应用》]()
+- [《深入浅出图神经网络》.刘忠雨]
+- [《图神经网络：基础、前言与应用》]
 
 ### 1.3、论文 + 软件 + 代码
 - [相关论文代码（百度网盘）](https://pan.baidu.com/s/1WG0fd2ue0UCFAFhnr-RaJw?pwd=918w)  
