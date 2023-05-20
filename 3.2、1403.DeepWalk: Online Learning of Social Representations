@@ -126,7 +126,7 @@ def skip_gram(wvi,  w) :                                    # w定义是否与�
                 param.grad.data.zero_()
 ################################################################################################################################
 ################################################################################################################################
-3\Wiki
+3\Wiki（需要整理）
 https://www.bilibili.com/video/BV1et4y187Gd/?spm_id_from=333.788&vd_source=26c583b46dbb1b1b34ae4743b60cf76f
 
 pip install networkx gensim pandas numpy tqdm scikit-learn matplotlib
