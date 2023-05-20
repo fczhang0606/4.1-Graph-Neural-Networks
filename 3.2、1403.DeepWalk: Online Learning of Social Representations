@@ -6,6 +6,7 @@ https://www.bilibili.com/video/BV1pW4y1z7pb/?spm_id_from=333.788&vd_source=26c58
 
 
 ################################################################################################################################
+################################################################################################################################
 conda create -n GNN_DeepWalk
 conda activate GNN_DeepWalk
 
@@ -24,6 +25,7 @@ pip3 install --upgrade jupyter_core jupyter_client
 
 
 
+################################################################################################################################
 ################################################################################################################################
 1\Deep Walk in karateclub
 
@@ -46,6 +48,7 @@ G_embedding.shape
 num_coms = 2
 clusters = KMeans(n_clusters=num_coms).fit_predict(G_embedding)
 print(clusters)
+################################################################################################################################
 ################################################################################################################################
 2\ZZ's Deep Walk
 
@@ -70,15 +73,15 @@ y=200
 t=6
 lr=0.025
 v=[0, 1, 2, 3, 4, 5, 6, 7]
-################################################################################################################################
-def RandomWalk(node, t) :
-    walk = [node]
-    
-    for i in range(t-1) :
-        node = adj_list[node][random.randint(0, len(adj_list[node]) - 1)]
-        walk.append(node)
 
-    return walk
+model = Model()
+for i in range(y) :
+    random.shuffle(v)                                       # 原位打乱列表
+    for vi in v :
+        wvi = RandomWalk(vi, t)
+        skip_gram(wvi, w)
+
+print(model.phi)
 ################################################################################################################################
 class Model(torch.nn.Module) :
 
@@ -92,33 +95,36 @@ class Model(torch.nn.Module) :
         out = torch.matmul(hid, self.phi2)
         return out
 ################################################################################################################################
-def skip_gram(wvi,  w) :
+def RandomWalk(node, t) :
+    walk = [node]
+    
+    for i in range(t-1) :
+        node = adj_list[node][random.randint(0, len(adj_list[node]) - 1)]
+        walk.append(node)
+    
+    return walk
+################################################################################################################################
+def skip_gram(wvi,  w) :                                    # w定义是否与一般一致
 
     for j in range(len(wvi)) :
     
-        for k in range(max(0, j-w), min(j+w, len(wvi))) :
+        for k in range( max(0, j-w), min(j+w, len(wvi)) ) :
+        # 左闭右开 + 步长=1
+        # window长度包含中心词在内
             
-            #generate one hot vector
-            one_hot          = torch.zeros(size_vertex)
-            one_hot[wvi[j]]  = 1
+            # generate one hot vector
+            one_hot = torch.zeros(size_vertex)
+            one_hot[wvi[j]] = 1                                 # 取出原始one-hot
             
-            out              = model(one_hot)
-            loss             = torch.log(torch.sum(torch.exp(out))) - out[wvi[k]]
-            loss.backward()
+            out = model(one_hot)                           # 预测下一个词
             
-            for param in model.parameters():
+            loss = torch.log(torch.sum(torch.exp(out))) - out[wvi[k]]                               # 做了j*k次loss回传
+            loss.backward()                                        # 回传修改参数
+            
+            for param in model.parameters() :
                 param.data.sub_(lr*param.grad)
                 param.grad.data.zero_()
 ################################################################################################################################
-model = Model()
-for i in range(y):
-    random.shuffle(v)
-    for vi in v:
-        wvi=RandomWalk(vi,t)
-        skip_gram(wvi, w)
-print(model.phi)
-
-
 ################################################################################################################################
 3\Wiki
 https://www.bilibili.com/video/BV1et4y187Gd/?spm_id_from=333.788&vd_source=26c583b46dbb1b1b34ae4743b60cf76f
