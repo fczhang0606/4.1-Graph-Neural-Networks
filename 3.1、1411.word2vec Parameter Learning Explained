@@ -1,5 +1,7 @@
 https://arxiv.org/pdf/1411.2738.pdf
 
+https://www.bilibili.com/video/BV1Lb411p7FD?p=1&vd_source=26c583b46dbb1b1b34ae4743b60cf76f
+
 Continuous Bag-of-Word Model
         根据上下文词汇预测中心词汇
 
@@ -10,4 +12,3 @@ Skip-Gram Model
         Hierarchical Softmax
         Negative Sampling
 
-https://www.bilibili.com/video/BV1Lb411p7FD?p=1&vd_source=26c583b46dbb1b1b34ae4743b60cf76f
