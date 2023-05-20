@@ -1,18 +1,16 @@
-# Graph Neural Networks
+# 1、基础
 
-## 1、入门
-
-### 1.1、图论
+## 1.1、图论
 - [《Introduction to Graph Theory》.Robin J. Wilson]
-- [参考链接]
-    //图论基础: https://zhuanlan.zhihu.com/p/543187296
+- [参考链接]  
+        https://zhuanlan.zhihu.com/p/543187296
 
-### 1.2、图神经网络
-- [A Gentle Introduction to Graph Neural Networks](https://distill.pub/2021/gnn-intro/)
-- [GNN从入门到精通](https://www.bilibili.com/video/BV1K5411H7EQ/?p=1&vd_source=26c583b46dbb1b1b34ae4743b60cf76f)
-- [Stanford CS224W]
-    //(https://github.com/TommyZihao/zihao_course/tree/main/CS224W)
-
+## 1.2、GNN系列简介
+### 视频
+- [GNN从入门到精通](https://www.bilibili.com/video/BV1K5411H7EQ/?spm_id_from=333.337.search-card.all.click&vd_source=26c583b46dbb1b1b34ae4743b60cf76f)
+- [Stanford CS224W](https://web.stanford.edu/class/cs224w)  
+        https://github.com/TommyZihao/zihao_course/tree/main/CS224W
+### 书籍
 - [《深入浅出图神经网络》.刘忠雨]
 - [《图神经网络：基础、前言与应用》]
 
