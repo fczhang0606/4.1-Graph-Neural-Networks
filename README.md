@@ -21,8 +21,8 @@
 
 --------------------------------------------------------------------------------------------------------------------------------
 # 2、综述
-- [1901.A Comprehensive Survey on Graph Neural Networks](https://arxiv.org/abs/1901.00596)
-- [2101.Graph neural networks: A review of methods and applications](https://sci-hub.st/https://doi.org/10.1016/j.aiopen.2021.01.001)
+- [1901.A Comprehensive Survey on Graph Neural Networks]
+- [2101.Graph neural networks: A review of methods and applications]
 
 --------------------------------------------------------------------------------------------------------------------------------
 # 3、论文
