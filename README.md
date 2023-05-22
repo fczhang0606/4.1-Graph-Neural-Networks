@@ -17,9 +17,9 @@
 
 ## 1.3、资源
 - [论文代码合集](https://pan.baidu.com/s/1WG0fd2ue0UCFAFhnr-RaJw?pwd=918w)  
-        //918w
-https://github.com/shenweichen/GraphEmbedding
-https://github.com/shenweichen/GraphNeuralNetwork
+        //918w  
+https://github.com/shenweichen/GraphEmbedding  
+https://github.com/shenweichen/GraphNeuralNetwork  
 
 --------------------------------------------------------------------------------------------------------------------------------
 # 2、综述
