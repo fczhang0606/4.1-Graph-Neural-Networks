@@ -22,7 +22,7 @@
 - https://github.com/shenweichen/GraphEmbedding  
 - https://github.com/shenweichen/GraphNeuralNetwork  
 --------------------------------------------------------------------------------------------------------------------------------
-# 2、论文精度  
+# 2、论文精读  
 
 ## 2.0、综述  
 - [1901.A Comprehensive Survey on Graph Neural Networks]  
