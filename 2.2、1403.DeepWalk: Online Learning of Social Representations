@@ -128,88 +128,115 @@ def skip_gram(wvi,  w) :                                    # w定义是否与�
                 param.grad.data.zero_()
 ################################################################################################################################
 ################################################################################################################################
-3\Wiki（需要整理）
-https://www.bilibili.com/video/BV1et4y187Gd/?spm_id_from=333.788&vd_source=26c583b46dbb1b1b34ae4743b60cf76f
+3\Wiki                              https://www.bilibili.com/video/BV1et4y187Gd/?spm_id_from=333.788&vd_source=26c583b46dbb1b1b34ae4743b60cf76f
+################################################################################################################################
+# !pip install networkx
+# !pip install gensim
 
-pip install networkx gensim pandas numpy tqdm scikit-learn matplotlib
+# !pip install scikit-learn
 
+# !pip install matplotlib
+# !pip install numpy
+# !pip install pandas
+# !pip install tqdm
+################################################################################################################################
 import networkx as nx
-import pandas as pd
+
+import matplotlib.pyplot as plt
+# %:magic function
+%matplotlib inline
+plt.rcParams['font.sans-serif'] = ['SimHei']  # 显示中文标签
+plt.rcParams['axes.unicode_minus'] = False  # 显示负号
+
 import numpy as np
+import pandas as pd
 import random
 from tqdm import tqdm
-import matplotlib.pyplot as plt
-%matplotlib inline
-plt.rcParams['font.sans-serif']=['SimHei']
-plt.rcParams['axes.unicode_minus']=False
+################################################################################################################################
+`https://densitydesign.github.io/strumentalia-seealsology`
 
-https://densitydesign.github.io/strumentalia-seealsogy
-distance = 4
-https://en.wikipedia.org/wiki/Ayn_Rand
-https://en.wikipedia.org/wiki/Arthur_Schopenhauer
-.tsv
-
-df = pd.read_csv("1.tsv", sep = "\t")
-df.head()
-df.shape
-
-G = nx.from_pandas_edgelist(df, "source", "target", edge_attr=True, create_using=nx.Graph())
-len(G)
-
-# plt.figure(figsize=(15, 14))
-# nx.draw(G)
-# plt.show()
-
-def get_randomwalk(node, path_length):
-    random_walk = [node]
-    for i in range(path_length-1):
-        temp = list(G.geighbors(node))
-        temp = list(set(temp) - set(random_walk))
-        if len(temp) == 0:
-            break
-            
-        random_node = random.choice(temp)
-        random_walk.append(random_node)
-        node = random_node
-        
-    return random_walk
+https://en.wikipedia.org/wiki/Ren%C3%A9_Descartes
+    31 03 1596 – 11 02 1650
     
+https://en.wikipedia.org/wiki/Immanuel_Kant
+    22 04 1724 – 12 02 1804
+    
+https://en.wikipedia.org/wiki/Georg_Wilhelm_Friedrich_Hegel
+    27 08 1770 – 14 11 1831
+    
+https://en.wikipedia.org/wiki/Arthur_Schopenhauer
+    22 02 1788 – 21 09 1860
+    
+https://en.wikipedia.org/wiki/Karl_Marx
+    05 05 1818 – 14 03 1883
+    
+https://en.wikipedia.org/wiki/Sigmund_Freud
+    06 05 1856 – 23 09 1939
+    
+https://en.wikipedia.org/wiki/Ayn_Rand
+    02 02 1905 – 06 03 1982
+################################################################################################################################
+df = pd.read_csv("seealsology-data.tsv", sep = "\t")
+# df.shape: (2849, 3)
+# df.head()
+################################################################################################################################
+G = nx.from_pandas_edgelist(df, "source", "target", edge_attr=True, create_using=nx.Graph())
+# len(G)  # 2329
 all_nodes = list(G.nodes())
 all_nodes
-
-get_randomwalk('random forest', 5)
-
-gamma = 10
-walk_length = 5
-random_walks = []
-for n in tqdm(all_nodes):
-    for i in range(gamma):
-        random_walks.append(get_randomwalk(n, walk_length))
-        
-len(random_walks)
-random_walks[1]
-
-from gensim.models import Word2Vec
-
-model = Word2Vec(vector_size=256,
-                    window=4,
-                    sg=1,
-                    hs=0,
-                    negative=10,
-                    alpha=0.03,
-                    min_alpha=0.0007,
-                    seed=14
-                    )
-model.build_vocab(random_walks, progress_per=2)
-model.train(random_walks, total_examples=model.corpus_count, epochs=50, report_delay=1)
-
-model.wv.get_vector('Ayn Rand').shape
-model.wv.get_vector('Ayn Rand')
-
-model.wv.similar_by_word('Ayn Rand')
 ################################################################################################################################
-x = model.wv.vectors
+def get_randomwalk(node, path_length) :
 
+    random_walk = [node]
+    
+    for i in range(path_length - 1) :
+        
+        temp = list(G.neighbors(node))
+        temp = list(set(temp) - set(random_walk))  # set无序不重复元素集
+        # 当前节点的未访问过的邻居
+        if len(temp) == 0 :
+            break
+        
+        next_node = random.choice(temp)
+        random_walk.append(next_node)
+        node = next_node
+        
+    return random_walk
+
+get_randomwalk('sigmund freud', 6)
+################################################################################################################################
+random_walks = []
+r = 20
+l = 6
+
+for n in tqdm(all_nodes) :
+    for i in range(r) :
+        random_walks.append(get_randomwalk(n, l))
+        
+
+# len(random_walks)
+# random_walks[1]
+################################################################################################################################
+from gensim.models import Word2Vec
+model = Word2Vec(
+                 vector_size=48,  # Embedding维数
+                 window=6,  # 窗口宽度
+                 sg=1,  # Skip-Gram
+                 hs=0,  # 不加分层softmax
+                 negative=10,  # 负采样
+                 alpha=0.03,  # 初始学习率
+                 min_alpha=0.0007,  # 最小学习率
+                 seed=14  # 随机数种子
+                )
+
+model.build_vocab(random_walks, progress_per=2)
+model.train(random_walks, total_examples=model.corpus_count, epochs=200, report_delay=1)
+# model.wv.get_vector('sigmund freud').shape
+# model.wv.get_vector('sigmund freud')
+# model.wv.similar_by_word('sigmund freud')
+################################################################################################################################
+X = model.wv.vectors
+################################################################################################################################
 from sklearn.decomposition import PCA
 pca = PCA(n_components=2)
 embed_2d = pca.fit_transform(X)
@@ -219,37 +246,40 @@ plt.figure(figsize=(14, 14))
 plt.scatter(embed_2d[:, 0], embed_2d[:, 1])
 plt.show()
 
-term = 'Ayn Rand'
-term_256d = model.wv[term].reshape(1, -1)
-term_256d.shape
-term_2d = pca.transform(term_256d)
-term_2d
+term = 'sigmund freud'
+term_xd = model.wv[term].reshape(1, -1)
+# term_xd.shape  # (1, 48)
+
+term_2d = pca.transform(term_xd)
+# term_2d
 
 plt.figure(figsize=(14, 14))
-plt.scatter(embed_2d[:,0], embed_2d[:,1])
-plt.scatter(term_2d[:,0], term_2d[:,1], c='r', s=200)
+plt.scatter(embed_2d[:, 0], embed_2d[:, 1])
+plt.scatter(term_2d[:, 0], term_2d[:, 1], c='r', s=200)
 plt.show()
-
+################################################################################################################################
 pagerank = nx.pagerank(G)
 node_importance = sorted(pagerank.items(), key=lambda x:x[1], reverse=True)
-n = 30
+
+n = 10
 terms_chosen = []
-for each in node_importance[:n]:
+for each in node_importance[:n] :
     terms_chosen.append(each[0])
-terms_chosen.extend(['Ayn Rand', 'Arthur_Schopenhauer'])
+# terms_chosen.extend(['computer vision', 'deep learning'])
 terms_chosen
-terms2index = model.wv.key_to_index
-# index2term = model.wv.index_to_key
+
+# 词典中词条的索引号
+term2index = model.wv.key_to_index
 # term_index = np.array(term2index.values())
+# index2term = model.wv.index_to_key
 
-plt.figure(figsiez=(14, 14))
-plt.scatter(embed_2d[:,0], embed_2d[:,1])
+plt.figure(figsize=(14, 14))
+plt.scatter(embed_2d[:, 0], embed_2d[:, 1])
 
-for item in terms_chosen:
+for item in terms_chosen :
     idx = term2index[item]
     plt.scatter(embed_2d[idx, 0], embed_2d[idx, 1], c='r', s=50)
-    plt.annotate(item, xy=(embed_2d[idx,0], embed_2d[idx,1], c='k', fontsize=12))
-
+    plt.annotate(item, xy=(embed_2d[idx, 0], embed_2d[idx, 1]), c='k', fontsize=12)
 plt.show()
 ################################################################################################################################
 from sklearn.manifold import TSNE
@@ -257,50 +287,49 @@ tsne = TSNE(n_components=2, n_iter=1000)
 embed_2d = tsne.fit_transform(X)
 
 plt.figure(figsize=(14, 14))
-plt.scatter(embed_2d[:,0], embed_2d[:,1])
+plt.scatter(embed_2d[:, 0], embed_2d[:, 1])
 plt.show()
 
 plt.figure(figsize=(14, 14))
-plt.scatter(embed_2d[:,0], embed_2d[:,1])
+plt.scatter(embed_2d[:, 0], embed_2d[:, 1])
 
-for item in terms_chosen:
+for item in terms_chosen :
     idx = term2index[item]
     plt.scatter(embed_2d[idx, 0], embed_2d[idx, 1], c='r', s=50)
-    plt.annotate(item, xy=(embed_2d[idx,0], embed_2d[idx,1], c='k', fontsize=12))
-
+    plt.annotate(item, xy=(embed_2d[idx, 0], embed_2d[idx, 1]), c='k', fontsize=12)
 plt.show()
-
-embed_2d.shape
-
+################################################################################################################################
 terms_chosen_mask = np.zeros(X.shape[0])
-for item in terms_chosen:
+for item in terms_chosen :
     idx = term2index[item]
     terms_chosen_mask[idx] = 1
 
 df = pd.DataFrame()
-df['X'] = embed_2d[:,0]
-df['Y'] = embed_2d[:,1]
+df['X'] = embed_2d[:, 0]
+df['Y'] = embed_2d[:, 1]
 df['item'] = model.wv.index_to_key
 df['pagerank'] = pagerank.values()
 df['chosen'] = terms_chosen_mask
 
-df
+df.to_csv('tsne_vis_2d.csv', index=False)
 
-df.to_csv('.csv',index=False)
+df
 ################################################################################################################################
 from sklearn.manifold import TSNE
 tsne = TSNE(n_components=3, n_iter=1000)
 embed_3d = tsne.fit_transform(X)
 
 df = pd.DataFrame()
-df['X'] = embed_3d[:,0]
-df['Y'] = embed_3d[:,1]
-df['Z'] = embed_3d[:,2]
+df['X'] = embed_3d[:, 0]
+df['Y'] = embed_3d[:, 1]
+df['Z'] = embed_3d[:, 2]
 df['item'] = model.wv.index_to_key
 df['pagerank'] = pagerank.values()
 df['chosen'] = terms_chosen_mask
 
-df
+df.to_csv('tsne_vis_3d.csv', index=False)
 
-df.to_csv('.csv',index=False)
+df
+################################################################################################################################
+echarts的3d可视化
 ################################################################################################################################
