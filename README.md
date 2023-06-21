@@ -20,7 +20,10 @@
         //918w  
 
 - https://github.com/shenweichen/GraphEmbedding  
-- https://github.com/shenweichen/GraphNeuralNetwork  
+- https://github.com/shenweichen/GraphNeuralNetwork
+
+- https://paperswithcode.com/  
+
 --------------------------------------------------------------------------------------------------------------------------------
 # 2、论文精读  
 
