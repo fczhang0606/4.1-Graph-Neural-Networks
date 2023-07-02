@@ -44,6 +44,7 @@
 - [1704.struc2vec: Learning Node Representations from Structural Identity]  
 
 ## 2.3、GCN + GraphSAGE + GAT  
+- [0000.Spectral Graph Theory]  
 - [1609.Semi-supervised classification with graph convolutional networks]  
 - [1706.Inductive Representation Learning on Large Graphs]  
 - [1710.Graph Attention Networks]  
