@@ -32,6 +32,8 @@ python -m ipykernel install --user --name XXX
 代码复现：
 1\Deep Walk in karateclub
 
+! pip install karateclub
+
 import karateclub
 from karateclub import DeepWalk
 import networkx as nx
