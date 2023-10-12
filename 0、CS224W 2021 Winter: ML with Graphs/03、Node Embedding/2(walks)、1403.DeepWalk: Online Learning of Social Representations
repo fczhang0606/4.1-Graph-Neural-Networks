@@ -139,15 +139,15 @@ def skip_gram(wvi, w) :
 ################################################################################################################################
 3\Wiki            https://www.bilibili.com/video/BV1et4y187Gd/?spm_id_from=333.788&vd_source=26c583b46dbb1b1b34ae4743b60cf76f
 ################################################################################################################################
-# !pip install networkx
-# !pip install gensim
+# ! pip install networkx
+# ! pip install gensim
 
-# !pip install scikit-learn
+# ! pip install scikit-learn
 
-# !pip install matplotlib
-# !pip install numpy
-# !pip install pandas
-# !pip install tqdm
+# ! pip install matplotlib
+# ! pip install numpy
+# ! pip install pandas
+# ! pip install tqdm
 ################################################################################################################################
 import networkx as nx
 
@@ -162,7 +162,7 @@ import pandas as pd
 import random
 from tqdm import tqdm
 ################################################################################################################################
-`https://densitydesign.github.io/strumentalia-seealsology`
+https://densitydesign.github.io/strumentalia-seealsology
 
 https://en.wikipedia.org/wiki/Ren%C3%A9_Descartes
     31 03 1596 – 11 02 1650
@@ -185,14 +185,14 @@ https://en.wikipedia.org/wiki/Sigmund_Freud
 https://en.wikipedia.org/wiki/Ayn_Rand
     02 02 1905 – 06 03 1982
 ################################################################################################################################
-df = pd.read_csv("seealsology-data.tsv", sep = "\t")
-# df.shape: (2849, 3)
+df = pd.read_csv("seealsology-data.tsv", sep="\t")
+df.shape  # (6935, 3)
 # df.head()
 ################################################################################################################################
 G = nx.from_pandas_edgelist(df, "source", "target", edge_attr=True, create_using=nx.Graph())
-# len(G)  # 2329
+len(G)  # 4865
 all_nodes = list(G.nodes())
-all_nodes
+# all_nodes
 ################################################################################################################################
 def get_randomwalk(node, path_length) :
 
@@ -201,7 +201,7 @@ def get_randomwalk(node, path_length) :
     for i in range(path_length - 1) :
 
         temp = list(G.neighbors(node))
-        temp = list(set(temp) - set(random_walk))  # set无序不重复元素集
+        temp = list(set(temp) - set(random_walk))  # set，无序不重复元素集
         # 当前节点的未访问过的邻居
         if len(temp) == 0 :
             break
@@ -212,6 +212,7 @@ def get_randomwalk(node, path_length) :
 
     return random_walk
 
+#
 get_randomwalk('sigmund freud', 6)
 ################################################################################################################################
 random_walks = []
@@ -222,14 +223,14 @@ for n in tqdm(all_nodes) :
     for i in range(r) :
         random_walks.append(get_randomwalk(n, l))
 
-
-# len(random_walks)
+#
+len(random_walks)
 # random_walks[1]
 ################################################################################################################################
 from gensim.models import Word2Vec
 model = Word2Vec(
                  vector_size=48,  # Embedding维数
-                 window=6,  # 窗口宽度
+                 window=3,  # 窗口宽度
                  sg=1,  # Skip-Gram
                  hs=0,  # 不加分层softmax
                  negative=10,  # 负采样
@@ -240,9 +241,9 @@ model = Word2Vec(
 
 model.build_vocab(random_walks, progress_per=2)
 model.train(random_walks, total_examples=model.corpus_count, epochs=200, report_delay=1)
-# model.wv.get_vector('sigmund freud').shape
-# model.wv.get_vector('sigmund freud')
-# model.wv.similar_by_word('sigmund freud')
+model.wv.get_vector('sigmund freud').shape
+model.wv.get_vector('sigmund freud')
+model.wv.similar_by_word('sigmund freud')
 ################################################################################################################################
 X = model.wv.vectors
 ################################################################################################################################
@@ -299,6 +300,7 @@ plt.figure(figsize=(14, 14))
 plt.scatter(embed_2d[:, 0], embed_2d[:, 1])
 plt.show()
 
+#
 plt.figure(figsize=(14, 14))
 plt.scatter(embed_2d[:, 0], embed_2d[:, 1])
 
@@ -340,6 +342,6 @@ df.to_csv('tsne_vis_3d.csv', index=False)
 
 df
 ################################################################################################################################
-echarts的3d可视化
+# echarts的3d可视化
 ################################################################################################################################
 
