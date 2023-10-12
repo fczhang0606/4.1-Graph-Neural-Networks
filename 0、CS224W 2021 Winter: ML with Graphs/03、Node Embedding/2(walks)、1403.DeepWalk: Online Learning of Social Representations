@@ -74,10 +74,10 @@ adj_list = [
 [1, 3]]
 size_vertex = len(adj_list)
 
-w=3
-d=2
-y=200
-t=6
+w=3  # 单边窗口长度，包括中心词
+d=2  # 中间维度
+y=200  # 每节点采样次数
+t=6  # 每节点采样长度
 lr=0.025
 v=[0, 1, 2, 3, 4, 5, 6, 7]
 
@@ -95,8 +95,8 @@ class Model(torch.nn.Module) :
 
     def __init__(self) :
         super(Model, self).__init__()
-        self.phi1 = nn.Parameter(torch.rand((size_vertex, d), requires_grad=True))
-        self.phi2 = nn.Parameter(torch.rand((d, size_vertex), requires_grad=True))
+        self.phi1 = nn.Parameter(torch.rand((size_vertex, d), requires_grad=True))  # 8to2
+        self.phi2 = nn.Parameter(torch.rand((d, size_vertex), requires_grad=True))  # 2to8 softmax
 
     def forward(self, hot) :
         hid = torch.matmul(hot, self.phi1)
@@ -108,27 +108,27 @@ def RandomWalk(node, t) :
     walk = [node]
 
     for i in range(t-1) :
-        node = adj_list[node][random.randint(0, len(adj_list[node])-1)]
+        node = adj_list[node][random.randint(0, len(adj_list[node])-1)]  # 等概率
         walk.append(node)
 
     return walk
 ################################################################################################################################
-def skip_gram(wvi, w) :  # w定义是否与一般一致
+def skip_gram(wvi, w) :
 
     for j in range(len(wvi)) :
 
         for k in range( max(0, j-w), min(j+w, len(wvi)) ) :
-        # 左闭右开 + 步长=1
-        # window长度包含中心词在内
+        # 双重循环，制作语料
 
-            # generate one hot vector
+            # 中心词的one-hot
             one_hot = torch.zeros(size_vertex)
-            one_hot[wvi[j]] = 1  # 取出原始one-hot
+            one_hot[wvi[j]] = 1
 
-            out = model(one_hot)  # 预测下一个词
+            out = model(one_hot)  # 预测共现词的概率分布
+            # print(out)
 
             loss = torch.log(torch.sum(torch.exp(out))) - out[wvi[k]]  # 做了j*k次loss回传
-            loss.backward()  # 回传修改参数
+            loss.backward()  # 回传优化参数
 
             for param in model.parameters() :
                 param.data.sub_(lr*param.grad)
