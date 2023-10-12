@@ -88,7 +88,8 @@ for i in range(y) :
         wvi = RandomWalk(vi, t)
         skip_gram(wvi, w)
 
-print(model.phi)
+print(model.phi1)
+print(model.phi2)
 ################################################################################################################################
 class Model(torch.nn.Module) :
 
@@ -103,15 +104,16 @@ class Model(torch.nn.Module) :
         return out
 ################################################################################################################################
 def RandomWalk(node, t) :
+
     walk = [node]
 
     for i in range(t-1) :
-        node = adj_list[node][random.randint(0, len(adj_list[node]) - 1)]
+        node = adj_list[node][random.randint(0, len(adj_list[node])-1)]
         walk.append(node)
 
     return walk
 ################################################################################################################################
-def skip_gram(wvi,  w) :  # w定义是否与一般一致
+def skip_gram(wvi, w) :  # w定义是否与一般一致
 
     for j in range(len(wvi)) :
 
