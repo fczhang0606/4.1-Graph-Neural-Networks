@@ -1,19 +1,14 @@
 ################################################################################################################################
-################################################################################################################################
-# 论文
+论文阅读：
 https://arxiv.org/pdf/1609.02907.pdf
 
-# 谱图理论
-《深入浅出图神经网络》（刘忠雨）
-https://www.bilibili.com/video/BV1Vw411R7Fj?p=1
+https://www.bilibili.com/video/BV1K5411H7EQ?p=9&vd_source=7a5fcfa8c6ae901cc39288089c7c4eb1
+https://www.bilibili.com/video/BV1Hs4y157Ls/?spm_id_from=333.788&vd_source=7a5fcfa8c6ae901cc39288089c7c4eb1
+################################################################################################################################
 
-# 论文理解
-https://www.bilibili.com/video/BV1K5411H7EQ?p=9&vd_source=7a5fcfa8c6ae901cc39288089c7c4eb1                                                  GNN系列
-https://www.bilibili.com/video/BV1Hs4y157Ls/?spm_id_from=333.788&vd_source=7a5fcfa8c6ae901cc39288089c7c4eb1            同济子豪兄
-DeepShare
+
 ################################################################################################################################
-################################################################################################################################
-# env
+环境搭建：
 conda create -n GNN_GCN
 conda activate GNN_GCN
 
@@ -22,12 +17,17 @@ conda install python=3.8
 https://pytorch.org/get-started/previous-versions/
 conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=11.1 -c pytorch -c conda-forge
 ################################################################################################################################
-# jupyter notebook
 conda install ipykernel
 conda install platformdirs
 pip3 install ipywidgets
 pip3 install --upgrade jupyter_core jupyter_client
+
+python -m ipykernel install --user --name GNN_GCN
 ################################################################################################################################
+
+
+################################################################################################################################
+代码复现：
 ################################################################################################################################
 1、DeepShare（ZZ）
 ################################################################################################################################
@@ -135,7 +135,7 @@ Y = torch.tensor(
       [21, 22, 23, 24]]])
 # print(Y.shape)  # 2 x 3 x 4
 # print(Y.size(0))  # 2
-# 第X个括号里有多少，
+# 第X个方括号里有多少
 ################################################################################################################################
 # 模型初始参数随机
 model = Model(A, X.size(1), 10, 2)  # 输入： 34 x 10 x 2
@@ -144,7 +144,7 @@ model = Model(A, X.size(1), 10, 2)  # 输入： 34 x 10 x 2
 # 半监督：头尾节点类别已知，其它节点类别未知
 target = torch.tensor(
     [0 ,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
-     -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,1])
+     -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, 1])
 ################################################################################################################################
 # loss setup
 criterion = torch.nn.CrossEntropyLoss(ignore_index=-1)  # label=-1的样本对不参与计算
@@ -189,8 +189,10 @@ for i in range(666) :  # 每次从头训练
 animation = camera.animate(blit=False, interval=150)
 animation.save('./train_karate_animation.gif', writer='ffmpeg', fps=60)
 ################################################################################################################################
+
+
 ################################################################################################################################
-（code） 2、《深入浅出图神经网络》（刘忠雨）
+2、《深入浅出图神经网络》（刘忠雨）
 ################################################################################################################################
 # ! pip install scipy
 # ! pip install scikit-learn
@@ -228,7 +230,7 @@ class CoraData(object) :
                  for name in ['x', 'tx', 'allx', 'y', 'ty', 'ally', 'graph', 'test.index']]
 
     def __init__(self, data_root=
-                 "/home/zhfc/Jupyter-Notebook/DeepShare-GNN/Deep课程/data/cora", 
+                 "/home/zhfc/jupyter_files/GNN/2、GCN + GSage + GAT/data/cora", 
                  rebuild=False) :
 
         """Cora数据，包括数据下载、处理、加载等功能
@@ -254,13 +256,13 @@ class CoraData(object) :
         self.data_root = data_root
         save_file = osp.join(self.data_root, "ch5_cached.pkl")
         if osp.exists(save_file) and not rebuild :
-            print("Using Cached file: {}".format(save_file))
+            print("using cached file: {}".format(save_file))
             self._data = pickle.load(open(save_file, "rb"))
         else :
             self._data = self.process_data()
             with open(save_file, "wb") as f :
                 pickle.dump(self.data, f)  # 为什么不直接self._data?
-            print("Cached file: {}".format(save_file))
+            print("cached file: {}".format(save_file))
 
     @property  # 装饰器
     def data(self) :
@@ -545,6 +547,5 @@ for i in range(7) :
     plt.scatter(x, y, label=str(i))
 
 plt.legend()
-################################################################################################################################
 ################################################################################################################################
 
