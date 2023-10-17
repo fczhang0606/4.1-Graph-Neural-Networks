@@ -230,7 +230,7 @@ class CoraData(object) :
                  for name in ['x', 'tx', 'allx', 'y', 'ty', 'ally', 'graph', 'test.index']]
 
     def __init__(self, data_root=
-                 "/home/zhfc/jupyter_files/GNN/2、GCN + GSage + GAT/data/cora", 
+                 "/home/zhfc/jupyter_files/GNN/2、GCN + GSage + GAT/cora", 
                  rebuild=False) :
 
         """Cora数据，包括数据下载、处理、加载等功能
