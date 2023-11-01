@@ -19,6 +19,7 @@ https://zhuanlan.zhihu.com/p/142205899
 https://github.com/williamleif/GraphSAGE
 	http://snap.stanford.edu/graphsage/
 https://github.com/williamleif/graphsage-simple
+	https://blog.csdn.net/cg1985cg/article/details/120838378
 	https://zhuanlan.zhihu.com/p/360854229
 ################################################################################################################################
 
@@ -39,5 +40,7 @@ pip3 install ipywidgets
 pip3 install --upgrade jupyter_core jupyter_client
 
 python -m ipykernel install --user --name GNN_GraphSAGE
+################################################################################################################################
+pip install scikit-learn
 ################################################################################################################################
 
