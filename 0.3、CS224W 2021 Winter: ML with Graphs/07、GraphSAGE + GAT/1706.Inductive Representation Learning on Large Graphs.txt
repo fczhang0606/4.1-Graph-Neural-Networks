@@ -1,0 +1,43 @@
+################################################################################################################################
+论文：
+https://arxiv.org/pdf/1706.02216.pdf
+
+视频：
+https://www.bilibili.com/video/BV1XF411r7iE/?spm_id_from=333.337.search-card.all.click&vd_source=7a5fcfa8c6ae901cc39288089c7c4eb1
+
+https://www.bilibili.com/video/BV1ig411W7as/?spm_id_from=333.788&vd_source=7a5fcfa8c6ae901cc39288089c7c4eb1
+https://www.bilibili.com/video/BV1WT411m7Ff/?spm_id_from=333.788&vd_source=7a5fcfa8c6ae901cc39288089c7c4eb1
+	公众号：望舒同学
+
+文章：
+https://zhuanlan.zhihu.com/p/336195862
+https://zhuanlan.zhihu.com/p/345752728
+https://zhuanlan.zhihu.com/p/79637787
+https://zhuanlan.zhihu.com/p/142205899
+
+源码：
+https://github.com/williamleif/GraphSAGE
+	http://snap.stanford.edu/graphsage/
+https://github.com/williamleif/graphsage-simple
+	https://zhuanlan.zhihu.com/p/360854229
+################################################################################################################################
+
+
+################################################################################################################################
+环境搭建：
+conda create -n GNN_GraphSAGE
+conda activate GNN_GraphSAGE
+
+conda install python=3.8
+
+https://pytorch.org/get-started/previous-versions/
+conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=11.1 -c pytorch -c conda-forge
+################################################################################################################################
+conda install ipykernel
+conda install platformdirs
+pip3 install ipywidgets
+pip3 install --upgrade jupyter_core jupyter_client
+
+python -m ipykernel install --user --name GNN_GraphSAGE
+################################################################################################################################
+
