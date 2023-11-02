@@ -19,7 +19,7 @@ https://zhuanlan.zhihu.com/p/142205899
 https://github.com/williamleif/GraphSAGE
 	http://snap.stanford.edu/graphsage/
 https://github.com/williamleif/graphsage-simple
-	https://blog.csdn.net/cg1985cg/article/details/120838378
+	https://codeleading.com/article/65265993022/
 	https://zhuanlan.zhihu.com/p/360854229
 ################################################################################################################################
 
