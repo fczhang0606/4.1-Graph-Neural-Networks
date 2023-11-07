@@ -1,3 +1,5 @@
 dgl.ai
 
 https://github.com/dmlc/dgl
+
+https://docs.dgl.ai/index.html
