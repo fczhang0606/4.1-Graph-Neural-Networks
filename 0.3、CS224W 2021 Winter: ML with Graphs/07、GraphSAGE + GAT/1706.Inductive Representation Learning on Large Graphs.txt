@@ -362,4 +362,8 @@ pip3 install --upgrade jupyter_core jupyter_client
 
 python -m ipykernel install --user --name GNN_GraphSAGE_DGL
 ################################################################################################################################
+代码复现：
+https://docs.dgl.ai/tutorials/blitz/3_message_passing.html
+################################################################################################################################
+
 
