@@ -1,20 +1,20 @@
 超图：
     书籍：
-        《Hypergraph Theory: An Introduction》    京东、淘宝
+        《Hypergraph Theory: An Introduction》
         《超图-有限集的组合学》
-    论文：
-        
+        《Hypergraph Computation》  # https://link.springer.com/book/10.1007/978-981-99-0185-2
     链接：
         https://zhuanlan.zhihu.com/p/594699230
 
-        
 
 超图学习：
     论文：
-        《Hypergraph Learning: Methods and Practices》    https://sci-hub.yt/10.1109/TPAMI.2020.3039374
+        《Hypergraph Learning: Methods and Practices》  # https://sci-hub.yt/10.1109/TPAMI.2020.3039374
     链接：
         https://zhuanlan.zhihu.com/p/610304242
 
 超图神经网络：
     论文：
-        《Hypergraph Neural Networks》                    https://arxiv.org/pdf/1809.09401.pdf
+        《Hypergraph Neural Networks》  # https://arxiv.org/pdf/1809.09401.pdf
+        《HGNN+: General Hypergraph Neural Networks》  # https://ieeexplore.ieee.org/document/9795251
+
