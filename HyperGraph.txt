@@ -1,17 +1,16 @@
 超图：
     书籍：
-        《Hypergraph Theory: An Introduction》
-        《超图-有限集的组合学》
-        《Hypergraph Computation》  # https://link.springer.com/book/10.1007/978-981-99-0185-2
-    链接：
-        https://zhuanlan.zhihu.com/p/594699230
+        《超图-有限集的组合学》(Claude Berge)
+        《Hypergraph Theory: An Introduction》(Alain Bretto)  # https://link.springer.com/book/10.1007/978-3-319-00080-0
+        《Hypergraph Computation》(Qionghai Dai, Yue Gao)  # https://link.springer.com/book/10.1007/978-981-99-0185-2
 
 
-超图学习：
+超图机器学习：
     论文：
         《Hypergraph Learning: Methods and Practices》  # https://sci-hub.yt/10.1109/TPAMI.2020.3039374
     链接：
         https://zhuanlan.zhihu.com/p/610304242
+
 
 超图神经网络：
     论文：
