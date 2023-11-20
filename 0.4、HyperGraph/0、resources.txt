@@ -15,5 +15,8 @@
 超图神经网络：
     论文：
         《Hypergraph Neural Networks》  # https://arxiv.org/pdf/1809.09401.pdf
+            https://blog.csdn.net/weixin_45840199/article/details/128972958
         《HGNN+: General Hypergraph Neural Networks》  # https://ieeexplore.ieee.org/document/9795251
+            https://zhuanlan.zhihu.com/p/586807239
+            https://blog.csdn.net/ye6pipipihou/article/details/127498501
 
