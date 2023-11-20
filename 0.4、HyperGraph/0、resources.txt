@@ -6,10 +6,10 @@
 
 
 超图机器学习：
-    论文：
-        《Hypergraph Learning: Methods and Practices》  # https://sci-hub.yt/10.1109/TPAMI.2020.3039374
     链接：
         https://zhuanlan.zhihu.com/p/610304242
+    论文：
+        《Hypergraph Learning: Methods and Practices》  # https://sci-hub.yt/10.1109/TPAMI.2020.3039374
 
 
 超图神经网络：
