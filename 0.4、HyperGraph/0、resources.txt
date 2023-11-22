@@ -24,12 +24,8 @@
 
 
 超图神经网络 + 视觉：
-    识别：
-        《Inductive Multi-Hypergraph Learning and Its Application on View-Based 3D Object Classification》  #　https://sci-hub.yt/10.1109/TIP.2018.2862625
-    重建：
-        《3-D Object Retrieval and Recognition With Hypergraph Analysis》  # https://sci-hub.yt/10.1109/tip.2012.2199502
-    点云：
-        《An Efficient Hypergraph Approach to Robust Point Cloud Resampling》  # https://ieeexplore.ieee.org/document/9709703
-        《Hypergraph Spectral Analysis and Processing in 3D Point Cloud》  # https://arxiv.org/abs/2001.02384v1
-    
-    
+    见图
+
+
+超图神经网络 + 强化：
+
