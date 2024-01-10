@@ -1,5 +1,5 @@
 ################################################################################################################################
-attention: 
+attention:
     https://www.bilibili.com/video/BV1dt4y1J7ov/?spm_id_from=333.337.search-card.all.click&vd_source=7a5fcfa8c6ae901cc39288089c7c4eb1
 
     https://zhuanlan.zhihu.com/p/91839581
@@ -18,7 +18,7 @@ attention:
     https://www.zhihu.com/search?type=content&q=gat%E7%AE%97%E6%B3%95
 
 代码：
-    https://zhuanlan.zhihu.com/p/134148937
+    https://github.com/dmlc/dgl/tree/master/examples/pytorch/gat
 ################################################################################################################################
 
 
