@@ -8,8 +8,8 @@ attention:
     https://arxiv.org/pdf/1710.10903.pdf
 
 视频：
-    https://www.bilibili.com/video/BV1wP411T7dr/?spm_id_from=333.788&vd_source=7a5fcfa8c6ae901cc39288089c7c4eb1
-    https://www.bilibili.com/video/BV1QA41197A9/?spm_id_from=333.788&vd_source=7a5fcfa8c6ae901cc39288089c7c4eb1
+    https://www.bilibili.com/video/BV1wP411T7dr/?spm_id_from=333.788&vd_source=26c583b46dbb1b1b34ae4743b60cf76f
+    https://www.bilibili.com/video/BV1wP411T7dr/?spm_id_from=333.788&vd_source=26c583b46dbb1b1b34ae4743b60cf76f
         公众号：望舒同学
 
     https://www.bilibili.com/video/BV1T54y1H7Hs/?spm_id_from=333.337.search-card.all.click&vd_source=7a5fcfa8c6ae901cc39288089c7c4eb1
@@ -18,6 +18,7 @@ attention:
     https://www.zhihu.com/search?type=content&q=gat%E7%AE%97%E6%B3%95
 
 代码：
+    https://github.com/Diego999/pyGAT
     https://github.com/dmlc/dgl/tree/master/examples/pytorch/gat
 ################################################################################################################################
 
