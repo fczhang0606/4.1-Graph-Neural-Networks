@@ -1,0 +1,17 @@
+https://zhuanlan.zhihu.com/p/670282120
+https://www.zhihu.com/question/543498334/answer/3131392232
+
+
+
+2311、Spatio-Temporal Graph Neural Networks for Predictive Learning in Urban Computing: A Survey
+
+
+
+1707、Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting
+
+1709、Spatio-Temporal Graph Convolutional Networks: A Deep Learning Framework for Traffic Forecasting
+
+1811、T-GCN: A Temporal Graph ConvolutionalNetwork for Traffic Prediction
+
+1906、Graph WaveNet for Deep Spatial-Temporal Graph Modeling
+
