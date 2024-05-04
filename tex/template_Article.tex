@@ -1,0 +1,245 @@
+\documentclass[]{article}
+
+\usepackage{amsmath}
+
+%opening
+\title{}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+$$ V = \left \{ v_{1}, v_{2}, v_{3}, v_{4} \right \} $$
+$$ E = \left \{ e_{1}, e_{2}, e_{3}		   \right \} $$
+$$ G = \left \{ V, E \right \} $$
+
+$$ D = 
+\begin{bmatrix}
+	3  &  &  & \\
+	&  1  &  & \\
+	&  &  1  & \\
+	&  &  &  1
+\end{bmatrix}
+$$
+
+$$ A = 
+\begin{bmatrix}
+	0 & 1 & 1 & 1 \\
+	1 & 0 &   &	  \\
+	1 &   & 0 &	  \\
+	1 &   &   & 0
+\end{bmatrix}
+$$
+
+$$ L = D - A = 
+\begin{bmatrix}
+	3 & -1 & -1 & -1 \\
+	-1&  1 &    &	 \\
+	-1&    &  1 &	 \\
+	-1&    &    &  1
+\end{bmatrix}
+$$
+
+$$ \left | \lambda I - L \right | = 0 $$
+$$ L \overrightarrow{u} = \lambda \overrightarrow{u} $$
+
+$$
+L = 
+U \Lambda U^{T}
+= 
+\sum_{1}^{N}
+\lambda _{k}
+\overrightarrow{u_{k}}
+\cdot
+\overrightarrow{u_{k}}^{T}
+$$
+
+
+
+$$ \forall \overrightarrow{s} \in R^{N} $$
+$$
+p_{k} = 
+\left | \overrightarrow{s} \right | \cos \theta_{k}
+= 
+\frac
+{\overrightarrow{u_{k}}^{T} \cdot \overrightarrow{s}}
+{\left | \overrightarrow{u_{k}}^{T} \right |}
+= 
+\overrightarrow{u_{k}}^{T} \cdot \overrightarrow{s}
+$$
+
+$$ \overrightarrow{p} = U^{T} \overrightarrow{s} $$
+$$ \overrightarrow{s} = U \overrightarrow{p} $$
+
+$$
+TV \left ( \overrightarrow{s} \right )
+= 
+\overrightarrow{s}^{T} L \overrightarrow{s}
+= 
+\overrightarrow{s}^{T} U \Lambda U^{T} \overrightarrow{s}
+$$
+
+$$
+= 
+\left ( U^{T} \overrightarrow{s} \right ) ^{T}
+\Lambda
+\left ( U^{T} \overrightarrow{s} \right )
+= 
+\overrightarrow{p}^{T}
+\Lambda
+\overrightarrow{p}
+= 
+\sum_{1}^{N}
+p_{k}^{2} \lambda_{k} \ge 0
+$$
+
+$$
+E \left ( \overrightarrow{s} \right )
+= 
+\left | \overrightarrow{s} \right | ^{2}
+= 
+\left ( U \overrightarrow{p} \right ) ^{T}
+\cdot
+\left ( U \overrightarrow{p} \right )
+= 
+\overrightarrow{p}^{T} \overrightarrow{p}
+= 
+\sum_{1}^{N} p_{k}^{2}
+$$
+
+$$
+\overrightarrow{s_{in}}
+\left ( \sum_{1}^{N} p_{k} \overrightarrow{u_{k}} \right )
+\to H \to
+\overrightarrow{s_{out}}
+\left ( \sum_{1}^{N} p_{k}^{'} \overrightarrow{u_{k}} \right )
+$$
+
+$$
+\overrightarrow{s_{in}}
+\left ( \sum_{1}^{N} p_{k} \overrightarrow{u_{k}} \right )
+\to H \left ( filter \right ) \to
+\overrightarrow{s_{out}}
+\left ( \sum_{1}^{N}
+h \left ( \lambda_{k} \right ) p_{k} \overrightarrow{u_{k}} \right )
+$$
+
+$$
+\overrightarrow{s_{out}}
+= 
+H \overrightarrow{s_{in}}
+= 
+\sum_{1}^{N}
+h \left ( \lambda_{k} \right ) p_{k} \overrightarrow{u_{k}}
+$$
+
+$$
+= 
+\begin{bmatrix}
+	u_{1} & u_{2} & ... & u_{n}
+\end{bmatrix}
+\begin{bmatrix}
+	h \left ( \lambda_{1} \right ) p_{1} \\
+	h \left ( \lambda_{2} \right ) p_{2} \\
+	... \\
+	h \left ( \lambda_{n} \right ) p_{n}
+\end{bmatrix}
+$$
+
+$$
+= 
+U
+\begin{bmatrix}
+	h \left ( \lambda_{1} \right ) &  &  & \\
+	&  h \left ( \lambda_{2} \right ) &  & \\
+	&  &  ... & \\
+	&  &  & h \left ( \lambda_{n} \right )
+\end{bmatrix}
+\begin{bmatrix}
+	p_{1} \\
+	p_{2} \\
+	... \\
+	p_{n}
+\end{bmatrix}
+$$
+
+$$
+= 
+U
+\begin{bmatrix}
+	h \left ( \lambda_{1} \right ) &  &  & \\
+	&  h \left ( \lambda_{2} \right ) &  & \\
+	&  &  ... & \\
+	&  &  & h \left ( \lambda_{n} \right )
+\end{bmatrix}
+U^{T} \overrightarrow{s_{in}}
+$$
+
+$$
+H = 
+U
+\begin{bmatrix}
+	h \left ( \lambda_{1} \right ) &  &  & \\
+	&  h \left ( \lambda_{2} \right ) &  & \\
+	&  &  ... & \\
+	&  &  & h \left ( \lambda_{n} \right )
+\end{bmatrix}
+U^{T}
+= 
+U \Lambda_{h} U^{T}
+$$
+
+$$
+\Lambda_{h} = 
+\lim_{K \to \infty} \sum_{0}^{K} h_{k} \Lambda^{k}
+$$
+
+$$ K \ll N $$
+
+$$
+H = U
+\left (
+h_{0} \Lambda^{0} +
+h_{1} \Lambda^{1} +
+h_{2} \Lambda^{2} +
+... +
+h_{K} \Lambda^{K}
+\right )
+U^{T}
+$$
+
+$$
+= 
+U \left ( h_{0} \Lambda^{0} \right ) U^{T} +
+U \left ( h_{1} \Lambda^{1} \right ) U^{T} +
+U \left ( h_{2} \Lambda^{2} \right ) U^{T} +
+... +
+U \left ( h_{K} \Lambda^{K} \right ) U^{T}
+$$
+
+$$
+= 
+h_{0} L^{0} +
+h_{1} L^{1} +
+h_{2} L^{2} +
+... +
+h_{K} L^{K}
+= 
+\sum_{0}^{K} h_{k} L^{k}
+$$
+
+$$
+K = 1
+$$
+$$
+H = 
+h_{0} L^{0} +
+h_{1} L^{1}
+$$
+\end{abstract}
+
+\section{}
+
+\end{document}

@@ -1,0 +1,113 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%文档类型
+\documentclass{article}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%引入宏包
+\usepackage[fleqn]{amsmath}  % https://zhuanlan.zhihu.com/p/464170020
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+\usepackage{geometry}
+%\geometry{a4paper, landscape}  % 设置A4纸张并转为横向模式
+\usepackage{CJKutf8}
+
+\usepackage{booktabs}  % 三线表
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%正文内容
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{ch1: Hypergraph}
+
+
+~ \\[3pt]
+\begin{CJK}{UTF8}{gbsn}
+    理解： \\[3pt]
+\end{CJK}
+
+
+%
+\begin{align*}
+    & \mathcal{G} = ( \mathcal{V} , \mathcal{E} , W ) \\[3pt]
+        & \qquad \mathcal{G} \quad \text{: hypergraph} \\[3pt]
+        & \qquad \mathcal{V} \quad \text{: vertices} 
+          \qquad \qquad \text{U: Vertex Weight Matrix} \\[3pt]
+        & \qquad \qquad \qquad \qquad \qquad \quad \ \ \text{X: Vertex Feature Matrix} 
+          \qquad \text{Y: Vertex Label Matrix} \\[3pt]
+        & \qquad \mathcal{E} \quad \text{: hyperedges} 
+          \qquad \; \text{W: Hyperedge Weight Matrix} \\[3pt]
+\end{align*}
+
+%
+\begin{align*}
+    & H \in { |\mathcal{V}| * |\mathcal{E}| } \qquad \qquad 
+    H(v, e) = \left\{ 
+        \begin{array}{cc}
+            1       & \text{if} \ v \in e    \\[3pt]
+            0       & \text{if} \ v \notin e \\[3pt]
+        \end{array} \right. 
+\end{align*}
+
+%
+\begin{align*}
+    & d(v) = \sum_{e \in \mathcal{E}} H(v, e)*w(e) \qquad D_{v} \\[3pt]
+    & d(e) = \sum_{v \in \mathcal{V}} H(v, e)      \qquad \qquad \quad D_{e} \\[3pt]
+\end{align*}
+
+%
+\begin{align*}
+    & \Delta = D_{v} - H W D_{e}^{-1} H^{T} \\[3pt]
+    & \Delta = I - D_{v}^{-1/2} H W D_{e}^{-1} H^{T} D_{v}^{-1/2} \\[3pt]
+\end{align*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{ch2: Hypergraph Learning Architecture}
+
+
+~ \\[3pt]
+(1) Features
+\begin{align*}
+    & X \in R^{ |V| \times d } \qquad \qquad Y \in R^{ |E| \times d'} \\[3pt]
+    & \text{Externel + Internal(local+global) + Identity}
+\end{align*}
+
+
+~ \\[3pt]
+(2) Transformation
+
+~ \\[3pt]
+Reductive Transformation
+\begin{align*}
+    & ( E, X, Y ) \Rightarrow A 
+    \qquad \qquad 
+    \text{hyperedges to edges} \\[3pt]
+    & \text{clique expansion + adaptive expansion}
+\end{align*}
+
+~ \\[3pt]
+Non-reductive Transformation
+\begin{align*}
+    & \text{star/line/tensor expansion}
+\end{align*}
+
+
+~ \\[3pt]
+(3) Message
+\begin{align*}
+    & \text{whose: v-v \ v-e \ e-v} \\[3pt]
+    & \text{what : e-consistent + e-dependent} \\[3pt]
+    & \text{how  : fixed-pooling + learnable-pooling} 
+\end{align*}
+
+
+~ \\[3pt]
+(4) Training
+
+
+\end{document}
+
