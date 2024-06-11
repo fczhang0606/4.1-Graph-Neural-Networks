@@ -91,7 +91,6 @@
 
 
 ~ \\[3pt]
-(1) Features
 \begin{align*}
     & s_{in} \left ( \sum_{1}^{N} p_{k} {u_{k}} \right )
       \to H \to 
@@ -136,8 +135,11 @@
             &  &  ... & \\
             &  &  & h \left ( \lambda_{n} \right )
         \end{bmatrix}
-        U^{T} \overrightarrow{s_{in}} 
-        H = 
+        U^{T} \overrightarrow{s_{in}}  \\[3pt]
+\end{align*}
+
+\begin{align*}
+    & H = 
         U
         \begin{bmatrix}
             h \left ( \lambda_{1} \right ) &  &  & \\
@@ -147,7 +149,36 @@
         \end{bmatrix}
         U^{T}
         = 
-        U \Lambda_{h} U^{T}
+        U \Lambda_{h} U^{T}  \\[3pt]
+    & \Lambda_{h} = 
+        \lim_{K \to \infty} \sum_{0}^{K} h_{k} \Lambda^{k} \qquad K \ll N  \\[3pt]
+    & H = U
+    \left (
+    h_{0} \Lambda^{0} +
+    h_{1} \Lambda^{1} +
+    h_{2} \Lambda^{2} +
+    ... +
+    h_{K} \Lambda^{K}
+    \right )
+    U^{T}  \\[3pt]
+    &= 
+    U \left ( h_{0} \Lambda^{0} \right ) U^{T} +
+    U \left ( h_{1} \Lambda^{1} \right ) U^{T} +
+    U \left ( h_{2} \Lambda^{2} \right ) U^{T} +
+    ... +
+    U \left ( h_{K} \Lambda^{K} \right ) U^{T} \\[3pt]
+    &=
+    h_{0} L^{0} +
+    h_{1} L^{1} +
+    h_{2} L^{2} +
+    ... +
+    h_{K} L^{K}
+    = 
+    \sum_{0}^{K} h_{k} L^{k} \\[3pt]
+    & K = 1 \qquad \qquad
+    H = 
+h_{0} L^{0} +
+h_{1} L^{1}
 \end{align*}
 
 
