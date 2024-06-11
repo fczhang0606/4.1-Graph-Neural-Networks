@@ -31,38 +31,59 @@
 
 %
 \begin{align*}
-    & \mathcal{G} = ( \mathcal{V} , \mathcal{E} , W ) \\[3pt]
-        & \qquad \mathcal{G} \quad \text{: hypergraph} \\[3pt]
-        & \qquad \mathcal{V} \quad \text{: vertices} 
-          \qquad \qquad \text{U: Vertex Weight Matrix} \\[3pt]
-        & \qquad \qquad \qquad \qquad \qquad \quad \ \ \text{X: Vertex Feature Matrix} 
-          \qquad \text{Y: Vertex Label Matrix} \\[3pt]
-        & \qquad \mathcal{E} \quad \text{: hyperedges} 
-          \qquad \; \text{W: Hyperedge Weight Matrix} \\[3pt]
+    & V = \{ v_{1}, v_{2}, v_{3}, v_{4} \}  \qquad \qquad \qquad
+    E = \{ e_{1}, e_{2}, e_{3} \}  \qquad \qquad \qquad
+    G = \{ V, E \}  \\[12pt]
+    & D = 
+        \begin{bmatrix}
+        3  &  &  & \\
+        &  1  &  & \\
+        &  &  1  & \\
+        &  &  &  1
+        \end{bmatrix} \qquad \qquad
+      A = 
+        \begin{bmatrix}
+            0 & 1 & 1 & 1 \\
+            1 & 0 &   &	  \\
+            1 &   & 0 &	  \\
+            1 &   &   & 0
+        \end{bmatrix} \qquad \qquad
+      L = D - A = 
+        \begin{bmatrix}
+            3 & -1 & -1 & -1 \\
+            -1&  1 &    &	 \\
+            -1&    &  1 &	 \\
+            -1&    &    &  1
+        \end{bmatrix}  \\[12pt]
+    & L_{sym} = D^{-1/2}LD^{-1/2} = I - D^{-1/2}AD^{-1/2}  \\[3pt]
+    & L_{rw} = D^{-1}L = I - D^{-1}A 
 \end{align*}
 
 %
 \begin{align*}
-    & H \in { |\mathcal{V}| * |\mathcal{E}| } \qquad \qquad 
-    H(v, e) = \left\{ 
-        \begin{array}{cc}
-            1       & \text{if} \ v \in e    \\[3pt]
-            0       & \text{if} \ v \notin e \\[3pt]
-        \end{array} \right. 
+    & \left | \lambda I - L \right | = 0  \\[3pt]
+    & L \overrightarrow{u} = \lambda \overrightarrow{u}  \\[3pt]
+    & L = U \Lambda U^{T} = \sum_{1}^{N} \lambda_{k} u_{k} \cdot u_{k}^{T} 
 \end{align*}
 
 %
 \begin{align*}
-    & d(v) = \sum_{e \in \mathcal{E}} H(v, e)*w(e) \qquad D_{v} \\[3pt]
-    & d(e) = \sum_{v \in \mathcal{V}} H(v, e)      \qquad \qquad \quad D_{e} \\[3pt]
+    & \forall s \in R^{N} \qquad \qquad 
+      p_{k} = |s| \cos \theta_{k} = 
+      \frac{u_{k}^{T} \cdot s}{|u_{k}^{T}|} = 
+      u_{k}^{T} \cdot s  \\[3pt]
+    & p = U^{T} s \qquad \qquad s = U p 
 \end{align*}
 
 %
 \begin{align*}
-    & \Delta = D_{v} - H W D_{e}^{-1} H^{T} \\[3pt]
-    & \Delta = I - D_{v}^{-1/2} H W D_{e}^{-1} H^{T} D_{v}^{-1/2} \\[3pt]
+    & TV(s) = s^{T} L s = s^{T} U \Lambda U^{T} s = 
+      ( U^{T} s )^{T} \Lambda ( U^{T} s ) = 
+      p^{T} \Lambda p = \sum_{1}^{N} 
+      p_{k}^{2} \lambda_{k} \ge 0  \\[3pt]
+    & E(s) = |s|^{2} = ( U p )^{T} \cdot ( U p ) = 
+      p^{T} p = \sum_{1}^{N} p_{k}^{2} 
 \end{align*}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -72,8 +93,61 @@
 ~ \\[3pt]
 (1) Features
 \begin{align*}
-    & X \in R^{ |V| \times d } \qquad \qquad Y \in R^{ |E| \times d'} \\[3pt]
-    & \text{Externel + Internal(local+global) + Identity}
+    & s_{in} \left ( \sum_{1}^{N} p_{k} {u_{k}} \right )
+      \to H \to 
+      s_{out} \left ( \sum_{1}^{N} p_{k}^{'} {u_{k}} \right )  \\[3pt]
+    & s_{in} \left ( \sum_{1}^{N} p_{k} {u_{k}} \right )
+      \to H(filter) \to 
+      s_{out} \left ( \sum_{1}^{N} h(\lambda_{k}) p_{k} u_{k} \right )  \\[3pt]
+\end{align*}
+
+
+\begin{align*}
+    & s_{out} = H s_{in} = \sum_{1}^{N} h(\lambda_{k}) p_{k} u_{k}  \\[3pt]
+    & = 
+        \begin{bmatrix}
+            u_{1} & u_{2} & ... & u_{n}
+        \end{bmatrix}
+        \begin{bmatrix}
+            h \left ( \lambda_{1} \right ) p_{1} \\
+            h \left ( \lambda_{2} \right ) p_{2} \\
+            ... \\
+            h \left ( \lambda_{n} \right ) p_{n}
+        \end{bmatrix} 
+      = 
+        U
+        \begin{bmatrix}
+            h \left ( \lambda_{1} \right ) &  &  & \\
+            &  h \left ( \lambda_{2} \right ) &  & \\
+            &  &  ... & \\
+            &  &  & h \left ( \lambda_{n} \right )
+        \end{bmatrix}
+        \begin{bmatrix}
+            p_{1} \\
+            p_{2} \\
+            ... \\
+            p_{n}
+        \end{bmatrix}  \\[3pt]
+    & = 
+        U
+        \begin{bmatrix}
+            h \left ( \lambda_{1} \right ) &  &  & \\
+            &  h \left ( \lambda_{2} \right ) &  & \\
+            &  &  ... & \\
+            &  &  & h \left ( \lambda_{n} \right )
+        \end{bmatrix}
+        U^{T} \overrightarrow{s_{in}} 
+        H = 
+        U
+        \begin{bmatrix}
+            h \left ( \lambda_{1} \right ) &  &  & \\
+            &  h \left ( \lambda_{2} \right ) &  & \\
+            &  &  ... & \\
+            &  &  & h \left ( \lambda_{n} \right )
+        \end{bmatrix}
+        U^{T}
+        = 
+        U \Lambda_{h} U^{T}
 \end{align*}
 
 
