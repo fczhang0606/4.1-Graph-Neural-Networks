@@ -82,21 +82,21 @@
 
 %
 \begin{align*}
-    & \forall s \in R^{N} \qquad \qquad 
-      p_{k} = |s| \cos \theta_{k} = 
-      \frac{u_{k}^{T} \cdot s}{|u_{k}^{T}|} = 
-      u_{k}^{T} \cdot s  \\[3pt]
+    & \forall s \in R^{N}  \\[3pt]
+    & u_{k}^{T} \cdot s 
+      = \frac{u_{k}^{T} \cdot s}{|u_{k}^{T}|} 
+      = |s| \cos \theta_{k} = p_{k}  \\[3pt]
     & p = U^{T} s \qquad \qquad s = U p 
 \end{align*}
 
 %
 \begin{align*}
-    & TV(s) = s^{T} L s = s^{T} U \Lambda U^{T} s = 
-      ( U^{T} s )^{T} \Lambda ( U^{T} s ) = 
-      p^{T} \Lambda p = \sum_{1}^{N} 
-      p_{k}^{2} \lambda_{k} \ge 0  \\[3pt]
-    & E(s) = |s|^{2} = ( U p )^{T} \cdot ( U p ) = 
-      p^{T} p = \sum_{1}^{N} p_{k}^{2} 
+    & TV(s) = s^{T} L s = s^{T} U \Lambda U^{T} s 
+      = ( U^{T} s )^{T} \Lambda ( U^{T} s ) 
+      = p^{T} \Lambda p 
+      = \sum_{1}^{N} p_{k}^{2} \lambda_{k} \ge 0  \\[3pt]
+    & E(s) = |s|^{2} = ( U p )^{T} \cdot ( U p ) 
+      = p^{T} p = \sum_{1}^{N} p_{k}^{2} 
 \end{align*}
 
 ~ \\[3pt]
