@@ -20,7 +20,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{ch1: Hypergraph}
+\section*{ch1: Graph Theory}
 
 
 ~ \\[3pt]
@@ -31,40 +31,54 @@
 
 %
 \begin{align*}
-    & V = \{ v_{1}, v_{2}, v_{3}, v_{4} \}  \qquad \qquad \qquad
-    E = \{ e_{1}, e_{2}, e_{3} \}  \qquad \qquad \qquad
-    G = \{ V, E \}  \\[12pt]
+    & G = \{ V, E \}  \\[3pt]
+    & \qquad V = \{ v_{1}, v_{2}, v_{3}, v_{4} \}  \\[3pt]
+    & \qquad E = \{ e_{1}, e_{2}, e_{3} \} 
+\end{align*}
+
+%
+\begin{align*}
     & D = 
         \begin{bmatrix}
-        3  &  &  & \\
-        &  1  &  & \\
-        &  &  1  & \\
-        &  &  &  1
-        \end{bmatrix} \qquad \qquad
+            3  &  &  & \\
+            &  1  &  & \\
+            &  &  1  & \\
+            &  &  &  1
+        \end{bmatrix} \qquad \qquad 
       A = 
         \begin{bmatrix}
             0 & 1 & 1 & 1 \\
             1 & 0 &   &	  \\
             1 &   & 0 &	  \\
             1 &   &   & 0
-        \end{bmatrix} \qquad \qquad
-      L = D - A = 
+        \end{bmatrix}  \\[3pt]
+    & L = D - A = 
         \begin{bmatrix}
             3 & -1 & -1 & -1 \\
             -1&  1 &    &	 \\
             -1&    &  1 &	 \\
             -1&    &    &  1
-        \end{bmatrix}  \\[12pt]
-    & L_{sym} = D^{-1/2}LD^{-1/2} = I - D^{-1/2}AD^{-1/2}  \\[3pt]
-    & L_{rw} = D^{-1}L = I - D^{-1}A 
+        \end{bmatrix}  \\[3pt]
 \end{align*}
 
 %
 \begin{align*}
-    & \left | \lambda I - L \right | = 0  \\[3pt]
-    & L \overrightarrow{u} = \lambda \overrightarrow{u}  \\[3pt]
+    & L_{sym} = D^{-1/2} L D^{-1/2} = I - D^{-1/2} A D^{-1/2}  \\[3pt]
+    & L_{rw}  = D^{-1} L = I - D^{-1} A \qquad \text{random walk Laplacian ?}  \\[3pt]
+\end{align*}
+
+%
+\begin{align*}
+    & | \lambda I - L | = 0  \\[3pt]
+    & L u = \lambda u  \\[3pt]
     & L = U \Lambda U^{T} = \sum_{1}^{N} \lambda_{k} u_{k} \cdot u_{k}^{T} 
 \end{align*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{ch2: Graph Signal Processing}
+
 
 %
 \begin{align*}
@@ -84,11 +98,6 @@
     & E(s) = |s|^{2} = ( U p )^{T} \cdot ( U p ) = 
       p^{T} p = \sum_{1}^{N} p_{k}^{2} 
 \end{align*}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\section*{ch2: Hypergraph Learning Architecture}
-
 
 ~ \\[3pt]
 \begin{align*}
@@ -180,6 +189,12 @@
 h_{0} L^{0} +
 h_{1} L^{1}
 \end{align*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{ch2: Hypergraph Learning Architecture}
+
+
+
 
 
 ~ \\[3pt]
