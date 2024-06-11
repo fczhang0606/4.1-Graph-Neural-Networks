@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.16)  11 JUN 2024 14:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.16)  11 JUN 2024 15:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -446,13 +446,13 @@ L3 programming layer <2024-02-20>
 Here is how much of TeX's memory you used:
  5237 strings out of 474116
  74500 string characters out of 5747717
- 1945190 words of memory out of 5000000
+ 1944190 words of memory out of 5000000
  27532 multiletter control sequences out of 15000+600000
  561216 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 65i,20n,72p,216b,711s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 65i,14n,72p,216b,711s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu74.pfb><c:/texlive/2024/texmf-dist/fonts/type1/arphic/gbsnu/gbsnu89.pfb><c:/texlive/2024/texmf-dist/fonts/type1/arphic/gbsnu/gbsnuff.pfb>
-Output written on GNN.pdf (4 pages, 117458 bytes).
+Output written on GNN.pdf (4 pages, 117292 bytes).
 PDF statistics:
  80 PDF objects out of 1000 (max. 8388607)
  46 compressed objects within 1 object stream
