@@ -71,7 +71,7 @@
 \begin{align*}
     & | \lambda I - L | = 0  \\[3pt]
     & L u = \lambda u  \\[3pt]
-    & L = U \Lambda U^{T} = \sum_{1}^{N} \lambda_{k} u_{k} \cdot u_{k}^{T} 
+    & L = U \Lambda U^{T} = \sum_{1}^{N} \lambda_{k} u_{k} \cdot u_{k}^{T}  \\[3pt]
 \end{align*}
 
 
@@ -86,7 +86,7 @@
     & u_{k}^{T} \cdot s 
       = \frac{u_{k}^{T} \cdot s}{|u_{k}^{T}|} 
       = |s| \cos \theta_{k} = p_{k}  \\[3pt]
-    & p = U^{T} s \qquad \qquad s = U p 
+    & p = U^{T} s \qquad \qquad s = U p  \\[3pt]
 \end{align*}
 
 %
@@ -96,39 +96,34 @@
       = p^{T} \Lambda p 
       = \sum_{1}^{N} p_{k}^{2} \lambda_{k} \ge 0  \\[3pt]
     & E(s) = |s|^{2} = ( U p )^{T} \cdot ( U p ) 
-      = p^{T} p = \sum_{1}^{N} p_{k}^{2} 
+      = p^{T} p = \sum_{1}^{N} p_{k}^{2}  \\[3pt]
 \end{align*}
 
-~ \\[3pt]
+%
 \begin{align*}
-    & s_{in} \left ( \sum_{1}^{N} p_{k} {u_{k}} \right )
-      \to H \to 
-      s_{out} \left ( \sum_{1}^{N} p_{k}^{'} {u_{k}} \right )  \\[3pt]
-    & s_{in} \left ( \sum_{1}^{N} p_{k} {u_{k}} \right )
+    & s_{in} 
+      \left ( \sum_{1}^{N} p_{k} u_{k} \right ) 
       \to H(filter) \to 
-      s_{out} \left ( \sum_{1}^{N} h(\lambda_{k}) p_{k} u_{k} \right )  \\[3pt]
-\end{align*}
-
-
-\begin{align*}
+      s_{out} 
+      \left ( \sum_{1}^{N} p_{k}^{'} u_{k} \right ) = 
+      s_{out} 
+      \left ( \sum_{1}^{N} h(\lambda_{k}) p_{k} u_{k} \right )  \\[3pt]
     & s_{out} = H s_{in} = \sum_{1}^{N} h(\lambda_{k}) p_{k} u_{k}  \\[3pt]
-    & = 
-        \begin{bmatrix}
+    & = \begin{bmatrix}
             u_{1} & u_{2} & ... & u_{n}
         \end{bmatrix}
         \begin{bmatrix}
-            h \left ( \lambda_{1} \right ) p_{1} \\
-            h \left ( \lambda_{2} \right ) p_{2} \\
+            h(\lambda_{1}) p_{1} \\
+            h(\lambda_{2}) p_{2} \\
             ... \\
-            h \left ( \lambda_{n} \right ) p_{n}
-        \end{bmatrix} 
-      = 
-        U
+            h(\lambda_{n}) p_{n}
+        \end{bmatrix}
+      = U 
         \begin{bmatrix}
-            h \left ( \lambda_{1} \right ) &  &  & \\
-            &  h \left ( \lambda_{2} \right ) &  & \\
-            &  &  ... & \\
-            &  &  & h \left ( \lambda_{n} \right )
+            h(\lambda_{1})  &  &  &  \\
+            &  h(\lambda_{2})  &  &  \\
+            &  &  ...  &  \\
+            &  &  &  h(\lambda_{n})
         \end{bmatrix}
         \begin{bmatrix}
             p_{1} \\
@@ -136,17 +131,17 @@
             ... \\
             p_{n}
         \end{bmatrix}  \\[3pt]
-    & = 
-        U
+    & = U 
         \begin{bmatrix}
-            h \left ( \lambda_{1} \right ) &  &  & \\
-            &  h \left ( \lambda_{2} \right ) &  & \\
-            &  &  ... & \\
-            &  &  & h \left ( \lambda_{n} \right )
+            h(\lambda_{1})  &  &  &  \\
+            &  h(\lambda_{2})  &  &  \\
+            &  &  ...  &  \\
+            &  &  &  h(\lambda_{n})
         \end{bmatrix}
-        U^{T} \overrightarrow{s_{in}}  \\[3pt]
+        U^{T} s_{in}  \\[3pt]
 \end{align*}
 
+%
 \begin{align*}
     & H = 
         U
