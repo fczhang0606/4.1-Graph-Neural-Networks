@@ -3,7 +3,7 @@
 conda create -n STGNN_GWAVE
 conda activate STGNN_GWAVE
 
-conda install python=3.7.3
+conda install python=3.6
 
 https://pytorch.org/get-started/previous-versions/
 conda install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0 -c pytorch
@@ -22,3 +22,5 @@ python -m ipykernel install --user --name STGNN_GWAVE
 ################################################################################################################################
 python generate_training_data.py --output_dir=./data/METR-LA --traffic_df_filename=./data/metr-la.h5
 python generate_training_data.py --output_dir=./data/PEMS-BAY --traffic_df_filename=./data/pems-bay.h5
+
+python train.py --gcn_bool --adjtype doubletransition --addaptadj  --randomadj
