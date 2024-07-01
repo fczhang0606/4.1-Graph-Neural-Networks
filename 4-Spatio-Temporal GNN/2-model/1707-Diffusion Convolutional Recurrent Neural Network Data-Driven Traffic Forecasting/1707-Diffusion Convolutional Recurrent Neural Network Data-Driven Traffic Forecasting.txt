@@ -1,39 +1,39 @@
-https://github.com/liyaguang/DCRNN
-https://github.com/chnsh/DCRNN_PyTorch
-https://github.com/Gstdioh/DCRNN
+# https://github.com/liyaguang/DCRNN
+# https://github.com/chnsh/DCRNN_PyTorch
+# https://github.com/Gstdioh/DCRNN
 
 
 
-################################################################################################################################
-环境搭建：
-conda create -n STGNN_DCRNN
-conda activate STGNN_DCRNN
+# conda create -n STGNN_DCRNN
+# conda activate STGNN_DCRNN
 
-conda install python=3.8
+# conda install python=3.8
 
-https://pytorch.org/get-started/previous-versions/
-conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
+# https://pytorch.org/get-started/previous-versions/
+# conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
 
-pip install pyyaml==5.4.1
-pip install scipy
-pip install tqdm
-################################################################################################################################
-conda install ipykernel
-conda install platformdirs
-pip3 install ipywidgets
-pip3 install --upgrade jupyter_core jupyter_client
-
-python -m ipykernel install --user --name STGNN_DCRNN
-################################################################################################################################
-python prepare_data.py --config_filename configs/PEMS04/pems04_prepare.yaml
-python prepare_data.py --config_filename configs/METR-LA/metr-la_prepare.yaml
+# pip install pyyaml==5.4.1
+# pip install scipy
+# pip install tqdm
 
 
-python train.py --config_filename configs/PEMS04/pems04_train.yaml
-python train.py --config_filename configs/METR-LA/metr-la_train.yaml
+
+# conda install ipykernel
+# conda install platformdirs
+# pip3 install ipywidgets
+# pip3 install --upgrade jupyter_core jupyter_client
+
+# python -m ipykernel install --user --name STGNN_DCRNN
 
 
-python run_demo.py --config_filename configs/PEMS04/pems04_demo.yaml
-python run_demo.py --config_filename configs/METR-LA/metr-la_demo.yaml
+
+# python prepare_data.py --config_filename configs/PEMS04/pems04_prepare.yaml
+# python prepare_data.py --config_filename configs/METR-LA/metr-la_prepare.yaml
+
+# python train.py --config_filename configs/PEMS04/pems04_train.yaml
+# python train.py --config_filename configs/METR-LA/metr-la_train.yaml
+
+# python run_demo.py --config_filename configs/PEMS04/pems04_demo.yaml
+# python run_demo.py --config_filename configs/METR-LA/metr-la_demo.yaml
 
 
