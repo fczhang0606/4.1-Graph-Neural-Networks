@@ -138,12 +138,14 @@ class DConv(nn.Module) :
 
     @staticmethod
     def _build_sparse_matrix(L) :
+
         """
         将coo_matrix转换为torch中的coo_tensor
         :param L: scipy.sparse中的类型，如coo_matrix
         :return:
             L: sparse_coo_tensor
         """
+
         L = L.tocoo()  # 确保是coo_matrix，注意只能将scipy.sparse中的稀疏转为coo，不能直接将np.array转为coo
         indices = np.column_stack((L.row, L.col))  # 对列进行合并，indices [[0, 0], [0, 1], [1, 1], [0, 2]]
         indices = torch.from_numpy(indices)
@@ -152,6 +154,7 @@ class DConv(nn.Module) :
         # TODO：源码中还进行了上述的排序，但是我认为应该不用排序了，排序的话就和L.data的顺序对不上了
         # 注意，这里我没有进行device的设置
         L = torch.sparse_coo_tensor(indices.T, L.data, L.shape)
+
         return L
 
 
@@ -221,7 +224,9 @@ class DCGRUCell(nn.Module) :
 
 
 if __name__ == '__main__' :
+
     device1 = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
     N1 = 207
     B1 = 64
 

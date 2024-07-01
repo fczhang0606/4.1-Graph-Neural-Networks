@@ -15,6 +15,7 @@ from model.dcrnn_model import DCRNNModel
 
 class Supervisor :
 
+
     def __init__(self, **kwargs) :
 
         self._kwargs       = kwargs
@@ -91,6 +92,7 @@ class Supervisor :
             # 载入模型参数，并且保存训练状态
             self.load_model()
             self._epoch_num = self._saved_state['epoch']
+
 
     def save_model(self, epoch, optimizer_state_dict, is_best=False) :
         # 保存模型参数和训练状态

@@ -160,6 +160,7 @@ class DecoderModel(nn.Module, Seq2SeqAttrs) :
 
 class DCRNNModel(nn.Module, Seq2SeqAttrs) :
 
+
     def __init__(self, adj_mx, logger, **model_kwargs) :
 
         super().__init__()
@@ -172,6 +173,7 @@ class DCRNNModel(nn.Module, Seq2SeqAttrs) :
         # 即是否使用 Schedule Sampling
         self.use_curriculum_learning = bool(model_kwargs.get('use_curriculum_learning', False))
         self._logger = logger
+
 
     def count_parameters(self):
 
