@@ -12,6 +12,8 @@
 # https://pytorch.org/get-started/previous-versions/
 # conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
 
+# pip install pandas
+# pip install tables
 # pip install pyyaml==5.4.1
 # pip install scipy
 # pip install tqdm
