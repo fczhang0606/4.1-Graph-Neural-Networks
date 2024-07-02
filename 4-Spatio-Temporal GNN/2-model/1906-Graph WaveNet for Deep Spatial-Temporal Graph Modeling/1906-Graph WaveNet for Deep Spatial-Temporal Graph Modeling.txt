@@ -1,26 +1,49 @@
-################################################################################################################################
-环境搭建：
-conda create -n STGNN_GWAVE
-conda activate STGNN_GWAVE
+################################################################
+https://github.com/nnzhan/Graph-WaveNet
 
-conda install python=3.6
 
-https://pytorch.org/get-started/previous-versions/
-conda install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0 -c pytorch
+################################################################
+# conda create -n STGNN_GWAVE
+# conda activate STGNN_GWAVE
 
-    pip install -r requirements.txt
-pip install scipy
-pip install matplotlib
-pip install tables
-################################################################################################################################
-conda install ipykernel
-conda install platformdirs
-pip3 install ipywidgets
-pip3 install --upgrade jupyter_core jupyter_client
+# conda install python=3.8
 
-python -m ipykernel install --user --name STGNN_GWAVE
-################################################################################################################################
-python generate_training_data.py --output_dir=./data/METR-LA --traffic_df_filename=./data/metr-la.h5
-python generate_training_data.py --output_dir=./data/PEMS-BAY --traffic_df_filename=./data/pems-bay.h5
+# https://pytorch.org/get-started/previous-versions/
+# conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
 
+
+################################################################
+# pip install pandas
+# pip install tables
+# pip install scipy
+# pip install matplotlib
+
+
+################################################################
+# conda install ipykernel
+# conda install platformdirs
+# pip3 install ipywidgets
+# pip3 install --upgrade jupyter_core jupyter_client
+
+# python -m ipykernel install --user --name STGNN_GWAVE
+
+
+################################################################
+git clone git@github.com:nnzhan/Graph-WaveNet.git
+
+mkdir -p data/{METR-LA,PEMS-BAY}
+python generate_training_data.py --output_dir=data/METR-LA --traffic_df_filename=data/metr-la.h5
+python generate_training_data.py --output_dir=data/PEMS-BAY --traffic_df_filename=data/pems-bay.h5
 python train.py --gcn_bool --adjtype doubletransition --addaptadj  --randomadj
+
+https://www.snowneko.com/deep-learning/Graph-WaveNet.html
+data/sensor_graph/adj_mx.pkl
+train.py第10行的cuda:3更改为cuda:0
+在根目录建立空文件夹garage
+
+https://zhuanlan.zhihu.com/p/692726426
+model.py中：
+self.gate_convs.append(nn.Conv1d 改为 self.gate_convs.append(nn.Conv2d
+self.skip_convs.append(nn.Conv1d 改为 self.skip_convs.append(nn.Conv2d
+
+https://blog.csdn.net/Cherry_csc/article/details/134037315
