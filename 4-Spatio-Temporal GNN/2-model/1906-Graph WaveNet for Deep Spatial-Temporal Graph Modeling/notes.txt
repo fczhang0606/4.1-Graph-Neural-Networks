@@ -1,7 +1,15 @@
 ################################################################
+https://zhuanlan.zhihu.com/p/340205866
+https://zhuanlan.zhihu.com/p/342466255
+https://zhuanlan.zhihu.com/p/692726426
+
+https://www.snowneko.com/deep-learning/Graph-WaveNet.html
+
+
+################################################################
 https://github.com/nnzhan/Graph-WaveNet
 
-
+https://blog.csdn.net/Cherry_csc/article/details/134037315
 ################################################################
 # conda create -n STGNN_GWAVE
 # conda activate STGNN_GWAVE
@@ -47,3 +55,5 @@ self.gate_convs.append(nn.Conv1d 改为 self.gate_convs.append(nn.Conv2d
 self.skip_convs.append(nn.Conv1d 改为 self.skip_convs.append(nn.Conv2d
 
 https://blog.csdn.net/Cherry_csc/article/details/134037315
+
+
