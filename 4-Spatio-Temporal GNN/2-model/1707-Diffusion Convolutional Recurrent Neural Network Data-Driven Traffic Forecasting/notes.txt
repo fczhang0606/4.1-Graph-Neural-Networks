@@ -1,9 +1,14 @@
+################################################################
+https://blog.csdn.net/qq_40206371/article/details/127385319
+
+
+################################################################
 # https://github.com/liyaguang/DCRNN
 # https://github.com/chnsh/DCRNN_PyTorch
 # https://github.com/Gstdioh/DCRNN
 
 
-
+################################################################
 # conda create -n STGNN_DCRNN
 # conda activate STGNN_DCRNN
 
@@ -19,7 +24,7 @@
 # pip install tqdm
 
 
-
+################################################################
 # conda install ipykernel
 # conda install platformdirs
 # pip3 install ipywidgets
@@ -28,7 +33,7 @@
 # python -m ipykernel install --user --name STGNN_DCRNN
 
 
-
+################################################################
 # python prepare_data.py --config_filename configs/PEMS04/pems04_prepare.yaml
 # python prepare_data.py --config_filename configs/METR-LA/metr-la_prepare.yaml
 
