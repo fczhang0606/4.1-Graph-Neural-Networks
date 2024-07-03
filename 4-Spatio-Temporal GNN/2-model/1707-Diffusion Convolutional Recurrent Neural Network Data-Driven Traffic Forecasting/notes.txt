@@ -7,7 +7,8 @@ https://blog.csdn.net/qq_40206371/article/details/127385319
 # https://github.com/chnsh/DCRNN_PyTorch
 # https://github.com/Gstdioh/DCRNN
 
-
+https://zhuanlan.zhihu.com/p/685638258
+https://zhuanlan.zhihu.com/p/686447525
 ################################################################
 # conda create -n STGNN_DCRNN
 # conda activate STGNN_DCRNN
