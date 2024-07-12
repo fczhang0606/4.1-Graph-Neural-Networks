@@ -8,6 +8,7 @@ https://www.snowneko.com/deep-learning/Graph-WaveNet.html
 
 ################################################################
 https://github.com/nnzhan/Graph-WaveNet
+https://github.com/sshleifer/Graph-WaveNet
 
 https://blog.csdn.net/Cherry_csc/article/details/134037315
 ################################################################
@@ -39,11 +40,16 @@ https://blog.csdn.net/Cherry_csc/article/details/134037315
 ################################################################
 git clone git@github.com:nnzhan/Graph-WaveNet.git
 
+# 数据处理
 mkdir -p data/{METR-LA,PEMS-BAY}
 python generate_training_data.py --output_dir=data/METR-LA --traffic_df_filename=data/metr-la.h5
 python generate_training_data.py --output_dir=data/PEMS-BAY --traffic_df_filename=data/pems-bay.h5
+
+# 训练
 python train.py --gcn_bool --adjtype doubletransition --addaptadj  --randomadj
 
+
+################################################################
 https://www.snowneko.com/deep-learning/Graph-WaveNet.html
 data/sensor_graph/adj_mx.pkl
 train.py第10行的cuda:3更改为cuda:0
@@ -55,5 +61,4 @@ self.gate_convs.append(nn.Conv1d 改为 self.gate_convs.append(nn.Conv2d
 self.skip_convs.append(nn.Conv1d 改为 self.skip_convs.append(nn.Conv2d
 
 https://blog.csdn.net/Cherry_csc/article/details/134037315
-
 
