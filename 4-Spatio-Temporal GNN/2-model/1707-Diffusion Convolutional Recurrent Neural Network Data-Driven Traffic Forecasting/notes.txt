@@ -9,6 +9,8 @@ https://blog.csdn.net/qq_40206371/article/details/127385319
 
 https://zhuanlan.zhihu.com/p/685638258
 https://zhuanlan.zhihu.com/p/686447525
+
+
 ################################################################
 # conda create -n STGNN_DCRNN
 # conda activate STGNN_DCRNN
@@ -35,13 +37,18 @@ https://zhuanlan.zhihu.com/p/686447525
 
 
 ################################################################
+# 数据集
+链接：https://pan.baidu.com/s/11nEC0EivmoKjZLG8LmWgYg?pwd=rqi5 提取码：rqi5
+
+# 处理
 # python prepare_data.py --config_filename configs/PEMS04/pems04_prepare.yaml
 # python prepare_data.py --config_filename configs/METR-LA/metr-la_prepare.yaml
 
+# 训练
 # python train.py --config_filename configs/PEMS04/pems04_train.yaml
 # python train.py --config_filename configs/METR-LA/metr-la_train.yaml
 
+# 测试（修改模型路径）
 # python run_demo.py --config_filename configs/PEMS04/pems04_demo.yaml
 # python run_demo.py --config_filename configs/METR-LA/metr-la_demo.yaml
-
 
