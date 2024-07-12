@@ -1,0 +1,20 @@
+1、数据集
+自制    https://blog.csdn.net/Cherry_csc/article/details/134200767?spm=1001.2014.3001.5502
+
+
+metr-la.h5      shape=(34272, 207)
+pems-bay.h5     
+.h5     https://cloud.tencent.com/developer/article/2131085
+
+
+adj_mx.pkl
+.pkl    https://zhuanlan.zhihu.com/p/693488089
+dataframe       [batch_size, seq_length, num_nodes, channels]
+
+
+(train/test/val).npz
+.npz    https://blog.51cto.com/u_16175468/6915891
+
+
+2、数据处理和构图   https://zhuanlan.zhihu.com/p/685638258
+

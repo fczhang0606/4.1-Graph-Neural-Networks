@@ -1,16 +1,15 @@
 ################################################################
-https://zhuanlan.zhihu.com/p/340205866
-https://zhuanlan.zhihu.com/p/342466255
-https://zhuanlan.zhihu.com/p/692726426
-
-https://www.snowneko.com/deep-learning/Graph-WaveNet.html
 
 
 ################################################################
 https://github.com/nnzhan/Graph-WaveNet
 https://github.com/sshleifer/Graph-WaveNet
 
+https://www.snowneko.com/deep-learning/Graph-WaveNet.html
+https://blog.csdn.net/Cherry_csc/article/details/134200767?spm=1001.2014.3001.5502
+https://zhuanlan.zhihu.com/p/685638258
 https://blog.csdn.net/Cherry_csc/article/details/134037315
+https://zhuanlan.zhihu.com/p/692726426
 ################################################################
 # conda create -n STGNN_GWAVE
 # conda activate STGNN_GWAVE
