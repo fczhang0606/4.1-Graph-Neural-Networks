@@ -18,3 +18,35 @@ dataframe       [batch_size, seq_length, num_nodes, channels]
 
 2、数据处理和构图   https://zhuanlan.zhihu.com/p/685638258
 
+
+3、代码框架         https://blog.csdn.net/Cherry_csc/article/details/134037315
+train.py
+    命令行获取运行参数
+        parser = argparse.ArgumentParser()
+    加载图信息
+        load_pickle
+        load_adj
+    划分数据
+        dataloader = util.load_dataset(args.data, args.batch_size, args.batch_size, args.batch_size)
+    张量转移到device
+        device = torch.device(args.device)
+        supports = [torch.tensor(i).to(device) for i in adj_mx]
+    随机初始化 + 是否有graph prior knowledge
+        --randomadj
+        --aptonly
+    训练模型
+        class trainer():    {in engine.py}
+
+
+4、数据流关系       https://zhuanlan.zhihu.com/p/692726426
+
+    X = [B, F, N, T]    =(64, 2, 207, 13)
+    (64, 2, 207, 13) ->(64, 32, 207, 13)
+    自适应邻接矩阵
+        gwnet Class     in model.py
+        randomadj   torch.randn(num_nodes, 10)      为什么不直接生成(N, N)的邻接矩阵，因为计算量太大
+        !randomadj  读取DCRNN里面生成好的adj            ?矩阵特征值分解，取了前10个特征向量
+    (64, 32, 207, 13)->(64, 256, 207, 1)            13 + (-1-2/-1-2/-1-2/-1-2) = 1
+    (64, 256, 207, 1)->(64, 512, 207, 1)->(64, 12, 207, 1)
+    (64, 12, 207, 1) ->(64, 1, 207, 12)
+
