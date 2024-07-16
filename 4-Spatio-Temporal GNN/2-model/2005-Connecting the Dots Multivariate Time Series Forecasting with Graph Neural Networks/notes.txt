@@ -7,7 +7,7 @@ https://zhuanlan.zhihu.com/p/496018565
 ################################################################
 https://github.com/nnzhan/MTGNN
 
-
+https://zhuanlan.zhihu.com/p/639784261
 ################################################################
 # conda create -n STGNN_MTGNN
 # conda activate STGNN_MTGNN
@@ -38,4 +38,7 @@ https://github.com/nnzhan/MTGNN
 ################################################################
 train.py    cuda:0
 在根目录建立空文件夹save
+
+
+################################################################
 
