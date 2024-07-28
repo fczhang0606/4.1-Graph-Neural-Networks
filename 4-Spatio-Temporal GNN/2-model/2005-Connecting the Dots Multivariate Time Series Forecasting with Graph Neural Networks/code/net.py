@@ -93,7 +93,7 @@ class gtnet(nn.Module) :
         assert seq_len==self.seq_length, 'input sequence length not equal to preset sequence length'
 
         if self.seq_length<self.receptive_field :
-            input = nn.functional.pad(input, (self.receptive_field-self.seq_length, 0, 0, 0))
+            input = nn.functional.pad(input, (self.receptive_field-self.seq_length, 0, 0, 0))  # padding
 
         if self.gcn_true :
             if self.buildA_true :
@@ -102,7 +102,7 @@ class gtnet(nn.Module) :
                 else :
                     adp = self.gc(idx)
             else :
-                adp = self.predefined_A
+                adp = self.predefined_A  # 预定义的图结构
 
         x = self.start_conv(input)
         skip = self.skip0(F.dropout(input, self.dropout, training=self.training))

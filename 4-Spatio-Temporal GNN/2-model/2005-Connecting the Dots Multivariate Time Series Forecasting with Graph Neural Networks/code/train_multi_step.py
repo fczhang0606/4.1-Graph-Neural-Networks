@@ -121,7 +121,7 @@ def main(runid):
         dataloader['train_loader'].shuffle()
         for iter, (x, y) in enumerate(dataloader['train_loader'].get_iterator()):
             trainx = torch.Tensor(x).to(device)
-            trainx= trainx.transpose(1, 3)
+            trainx= trainx.transpose(1, 3)  # 第一维度和第三维度交换
             trainy = torch.Tensor(y).to(device)
             trainy = trainy.transpose(1, 3)
             if iter%args.step_size2==0:

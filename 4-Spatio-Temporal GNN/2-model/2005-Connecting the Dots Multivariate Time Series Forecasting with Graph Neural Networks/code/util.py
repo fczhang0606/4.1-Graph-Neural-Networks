@@ -1,36 +1,49 @@
 import torch
 from torch.autograd import Variable
+# 用于存储和操作张量（Tensor）的类，可以跟踪张量的计算历史，从而实现自动微分
 
 import numpy as np
 import os
 import pickle
-import scipy.sparse as sp
-from scipy.sparse import linalg
+import scipy.sparse as sp  # 稀疏矩阵
+from scipy.sparse import linalg  # 处理线性运算
 
 
+# 对XX数据的归一化
 def normal_std(x) :
+    # .std()求标准差
     return x.std() * np.sqrt((len(x) - 1.)/(len(x)))
 
 
 class DataLoaderS(object) :
 
+    # train and valid is the ratio of training set and validation set.
+    # test = 1 - train - valid
 
-    # train and valid is the ratio of training set and validation set. test = 1 - train - valid
+    # exchange_rate.txt : 7588*8
+
+
     def __init__(self, file_name, train, valid, device, horizon, window, normalize=2) :
 
-        self.P = window
-        self.h = horizon
         fin = open(file_name)
         self.rawdat = np.loadtxt(fin, delimiter=',')
         self.dat = np.zeros(self.rawdat.shape)
-        self.n, self.m = self.dat.shape
+        self.n, self.m = self.dat.shape  # n=7588, m=8
+
         self.normalize = 2
-        self.scale = np.ones(self.m)
-        self._normalized(normalize)
+        self._normalized(normalize)  # normalize模式选择，对self.dat归一化
         self._split(int(train*self.n), int((train+valid)*self.n), self.n)
 
-        self.scale = torch.from_numpy(self.scale).float()
+        self.scale = np.ones(self.m)  # 1*8
+        self.scale = torch.from_numpy(self.scale).float()  # numpy转换为tensor
         tmp = self.test[1] * self.scale.expand(self.test[1].size(0), self.m)
+
+        
+
+        self.P = window
+        self.h = horizon
+        
+        
 
         self.scale = self.scale.to(device)
         self.scale = Variable(self.scale)
@@ -41,8 +54,8 @@ class DataLoaderS(object) :
         self.device = device
 
 
+    # normalize模式选择，对self.dat归一化
     def _normalized(self, normalize) :
-
 
         if (normalize == 0) :
             self.dat = self.rawdat
@@ -51,9 +64,9 @@ class DataLoaderS(object) :
         if (normalize == 1) :
             self.dat = self.rawdat / np.max(self.rawdat)
 
-        # normlized by the maximum value of each row(sensor).
+        # normalized by the maximum value of each row(sensor).
         if (normalize == 2) :
-            for i in range(self.m) :
+            for i in range(self.m) :  # column?
                 self.scale[i] = np.max(np.abs(self.rawdat[:, i]))  # 列缩放分母
                 self.dat[:, i] = self.rawdat[:, i] / np.max(np.abs(self.rawdat[:, i]))
 

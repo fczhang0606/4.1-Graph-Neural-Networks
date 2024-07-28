@@ -162,7 +162,8 @@ class dilated_inception(nn.Module) :
         return x
 
 
-class graph_constructor(nn.Module) :
+class graph_constructor(nn.Module) : 
+    # 为每个维度的特征初始化2个dim维的embeddings向量作为其节点的trainable node features
 
     def __init__(self, nnodes, k, dim, device, alpha=3, static_feat=None) :
         super(graph_constructor, self).__init__()

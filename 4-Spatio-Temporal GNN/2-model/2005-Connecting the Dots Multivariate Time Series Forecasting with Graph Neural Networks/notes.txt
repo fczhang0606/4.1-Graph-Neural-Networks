@@ -8,6 +8,7 @@ https://zhuanlan.zhihu.com/p/496018565
 https://github.com/nnzhan/MTGNN
 
 https://zhuanlan.zhihu.com/p/639784261
+1、图结构是不是最优？
 ################################################################
 # conda create -n STGNN_MTGNN
 # conda activate STGNN_MTGNN

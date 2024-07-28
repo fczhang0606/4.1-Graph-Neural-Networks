@@ -22,8 +22,8 @@ def evaluate(data, X, Y, model, evaluateL2, evaluateL1, batch_size) :
     test = None
 
     for X, Y in data.get_batches(X, Y, batch_size, False) :
-        X = torch.unsqueeze(X, dim=1)
-        X = X.transpose(2, 3)
+        X = torch.unsqueeze(X, dim=1)  # 在第一维度位置增加一个维度
+        X = X.transpose(2, 3)  # 第二维度和第三维度位置交换
         with torch.no_grad() :
             output = model(X)
         output = torch.squeeze(output)
