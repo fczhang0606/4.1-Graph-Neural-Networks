@@ -23,35 +23,31 @@ class DataLoaderS(object) :
     # exchange_rate.txt : 7588*8
 
 
-    def __init__(self, file_name, train, valid, device, horizon, window, normalize=2) :
+    def __init__(self, file_name, train, valid, device, window, horizon, normalize=2) :
 
         fin = open(file_name)
         self.rawdat = np.loadtxt(fin, delimiter=',')
         self.dat = np.zeros(self.rawdat.shape)
         self.n, self.m = self.dat.shape  # n=7588, m=8
 
+        self.device = device
+
         self.normalize = 2
         self._normalized(normalize)  # normalize模式选择，对self.dat归一化
-        self._split(int(train*self.n), int((train+valid)*self.n), self.n)
+
+        self.P = window   # 往回看的时间步
+        self.h = horizon  # 向前看的时间步 ?= 预测的时间步（时刻/区间）
+        self._split(int(train*self.n), int((train+valid)*self.n), self.n)  # 划分数据集
 
         self.scale = np.ones(self.m)  # 1*8
         self.scale = torch.from_numpy(self.scale).float()  # numpy转换为tensor
-        tmp = self.test[1] * self.scale.expand(self.test[1].size(0), self.m)
-
-        
-
-        self.P = window
-        self.h = horizon
-        
-        
-
+        tmp = self.test[1] * self.scale.expand(self.test[1].size(0), self.m)  # 拓展为指定形状的张量
+        # self.test[1]是什么？.size(0)是什么？为什么要拓展？
         self.scale = self.scale.to(device)
         self.scale = Variable(self.scale)
 
-        self.rse = normal_std(tmp)
-        self.rae = torch.mean(torch.abs(tmp - torch.mean(tmp)))
-
-        self.device = device
+        self.rse = normal_std(tmp)                               # rse指标
+        self.rae = torch.mean(torch.abs(tmp - torch.mean(tmp)))  # rae指标
 
 
     # normalize模式选择，对self.dat归一化
@@ -71,49 +67,55 @@ class DataLoaderS(object) :
                 self.dat[:, i] = self.rawdat[:, i] / np.max(np.abs(self.rawdat[:, i]))
 
 
-    def _split(self, train, valid, test) :
+    # 划分数据集
+    def _split(self, train, valid, test) : # 
 
-        train_set = range(self.P + self.h - 1, train)
-        valid_set = range(train, valid)
-        test_set  = range(valid, self.n)
+        train_set = range(self.P + self.h - 1, train)  # 顺序第一部分，步长为1
+        valid_set = range(train, valid)  # 顺序第二部分
+        test_set  = range(valid, test)   # 顺序第三部分
 
-        self.train = self._batchify(train_set, self.h)
-        self.valid = self._batchify(valid_set, self.h)
-        self.test  = self._batchify(test_set, self.h)
+        # 集之中生成数据对的X和Y张量集合
+        self.train = self._batchify(train_set)
+        self.valid = self._batchify(valid_set)
+        self.test  = self._batchify(test_set)
 
 
-    def _batchify(self, idx_set, horizon) :
+    # 集之中生成数据对的X和Y张量集合
+    def _batchify(self, idx_set) :
 
-        n = len(idx_set)
-        X = torch.zeros((n, self.P, self.m))
-        Y = torch.zeros((n, self.m))
+        n = len(idx_set)  # 集中数据对条数
+        X = torch.zeros((n, self.P, self.m))  # w步输入，输入部分的张量集合
+        # Y = torch.zeros((n, self.h, self.m))
+        Y = torch.zeros((n, self.m))          # 1步输出，输出部分的张量集合
 
         for i in range(n) :
-            end = idx_set[i] - self.h + 1
-            start = end - self.P
-            X[i, :, :] = torch.from_numpy(self.dat[start:end, :])
-            Y[i, :]    = torch.from_numpy(self.dat[idx_set[i], :])
+            end   = idx_set[i] + 1 - self.h  # Y的初始位置
+            start = end - self.P             # X的初始位置
+            X[i, :, :] = torch.from_numpy(self.dat[start:end       , :])  # 左闭右开
+            Y[i, :]    = torch.from_numpy(self.dat[end:idx_set[i]+1, :])  # end:idx_set[i]+1 ?
 
         return [X, Y]
 
 
+    # [X, Y]中做[length/batch_size]+1多个batch
     def get_batches(self, inputs, targets, batch_size, shuffle=True) :
 
         length = len(inputs)
+
         if shuffle :
-            index = torch.randperm(length)
+            index = torch.randperm(length)  # 随机排列的整数序列
         else :
             index = torch.LongTensor(range(length))
 
-        start_idx = 0
-        while (start_idx < length) :
-            end_idx = min(length, start_idx + batch_size)
-            excerpt = index[start_idx:end_idx]
-            X = inputs[excerpt]
+        start_idx = 0  # 在index中的索引号
+        while (start_idx < length) :  # [length/batch_size]+1
+            end_idx = min(length, start_idx + batch_size)  # 最后一个batch可能不规整
+            excerpt = index[start_idx:end_idx]  # 摘录，节选
+            X = inputs [excerpt]
             Y = targets[excerpt]
             X = X.to(self.device)
             Y = Y.to(self.device)
-            yield Variable(X), Variable(Y)
+            yield Variable(X), Variable(Y)  # 返回？
             start_idx += batch_size
 
 
