@@ -1,3 +1,4 @@
+# 
 import torch
 import torch.nn as nn
 
@@ -12,9 +13,63 @@ from trainer import Optim
 from util import *
 
 
+# 
+def train(data, X, Y, model, criterion, optim, batch_size) :
+
+    model.train()  # 训练模式
+    # 评估模式中，无反向传播与参数更新，Drop层无随机丢弃，BN层使用全局统一数据归一化
+
+    total_loss = 0
+    n_samples  = 0
+    iter = 0
+
+    for X, Y in data.get_batches(X, Y, batch_size, True) :  # 周期性返回一个batch的数据
+
+        model.zero_grad()  # 梯度清零
+
+        # X = 64*12*8
+        X = torch.unsqueeze(X, dim=1)  # X = 64*1*12*8
+        X = X.transpose(2, 3)  # X = 64*1*8*12
+
+        # 
+        if iter % args.step_size == 0 :
+            perm = np.random.permutation(range(args.num_nodes))
+        num_sub = int(args.num_nodes / args.num_split)  # 子图数量
+
+        for j in range(args.num_split) :
+
+            if j != args.num_split - 1 :  # 不是最后一个子图
+                id = perm[j*num_sub : (j+1)*num_sub]
+            else :
+                id = perm[j*num_sub : ]
+
+            id = torch.tensor(id).to(device)  # 节点id
+            tx = X[:, :, id, :]
+            ty = Y[:, id]
+
+            output = model(tx, id)  # ?
+            output = torch.squeeze(output)  # 维度大小为1的所有维删除
+
+            scale = data.scale.expand(output.size(0), data.m)  # 扩大维度，64*8
+            scale = scale[:, id]
+
+            loss = criterion(output*scale, ty*scale)
+            loss.backward()
+
+            total_loss += loss.item()
+            n_samples  += (output.size(0) * data.m)
+            grad_norm  = optim.step()
+
+        if iter%100==0 :
+            print('iter:{:3d} | loss:{:.3f}'.format(iter, loss.item()/(output.size(0)*data.m)))
+        iter += 1
+
+    return total_loss / n_samples
+
+
 def evaluate(data, X, Y, model, evaluateL2, evaluateL1, batch_size) :
 
-    model.eval()  # 评估模式，无反向传播与参数更新，Drop层无随机丢弃，BN层使用全局统一数据归一化
+    model.eval()  
 
     total_loss = 0
     total_loss_l1 = 0
@@ -23,17 +78,16 @@ def evaluate(data, X, Y, model, evaluateL2, evaluateL1, batch_size) :
     predict = None
     test = None
 
-    for X, Y in data.get_batches(X, Y, batch_size, False) :  # 周期性返回一个batch
+    for X, Y in data.get_batches(X, Y, batch_size, False) :  
 
-        # X = 64*12*8
-        X = torch.unsqueeze(X, dim=1)  # 在第一维度位置增加一个维度
-        # X = 64*1*12*8
-        X = X.transpose(2, 3)  # 第二维度和第三维度位置交换
-        # X = 64*1*8*12
+        
+        X = torch.unsqueeze(X, dim=1)
+        X = X.transpose(2, 3)
+        
 
         with torch.no_grad() :  # 无需BP阶段，节省内存
-            output = model(X)  # 64*1*8
-        output = torch.squeeze(output)  # input中维度大小为1的所有维删除
+            output = model(X)
+        output = torch.squeeze(output)  
         if len(output.shape)==1 :
             output = output.unsqueeze(dim=0)
 
@@ -64,45 +118,8 @@ def evaluate(data, X, Y, model, evaluateL2, evaluateL1, batch_size) :
     return rse, rae, correlation
 
 
-def train(data, X, Y, model, criterion, optim, batch_size) :
-
-    model.train()
-    total_loss = 0
-    n_samples = 0
-    iter = 0
-    for X, Y in data.get_batches(X, Y, batch_size, True) :
-        model.zero_grad()
-        X = torch.unsqueeze(X, dim=1)
-        X = X.transpose(2, 3)
-        if iter % args.step_size == 0 :
-            perm = np.random.permutation(range(args.num_nodes))
-        num_sub = int(args.num_nodes / args.num_split)
-
-        for j in range(args.num_split) :
-            if j != args.num_split - 1 :
-                id = perm[j*num_sub : (j+1)*num_sub]
-            else :
-                id = perm[j*num_sub : ]
-            id = torch.tensor(id).to(device)
-            tx = X[:, :, id, :]
-            ty = Y[:, id]
-            output = model(tx, id)
-            output = torch.squeeze(output)
-            scale = data.scale.expand(output.size(0), data.m)
-            scale = scale[:, id]
-            loss = criterion(output*scale, ty*scale)
-            loss.backward()
-            total_loss += loss.item()
-            n_samples += (output.size(0) * data.m)
-            grad_norm = optim.step()
-
-        if iter%100==0 :
-            print('iter:{:3d} | loss:{:.3f}'.format(iter, loss.item()/(output.size(0) * data.m)))
-        iter += 1
-    return total_loss / n_samples
-
-
 parser = argparse.ArgumentParser(description='PyTorch Time series forecasting')
+
 parser.add_argument('--data', type=str, default='./data/solar_AL.txt', 
                     help='location of the data file')
 parser.add_argument('--log_interval', type=int, default=2000, metavar='N', 
@@ -144,13 +161,12 @@ parser.add_argument('--epochs', type=int, default=1, help='')
 parser.add_argument('--num_split', type=int, default=1, help='number of splits for graphs')
 parser.add_argument('--step_size', type=int, default=100, help='step_size')
 
-
 args = parser.parse_args()
 device = torch.device(args.device)
 torch.set_num_threads(3)
 
 
-#
+# 
 def main() :
 
     # 读取数据文件，返回一个数据类的实例
@@ -179,29 +195,34 @@ def main() :
                   layer_norm_affline=False)
     model = model.to(device)
 
+    # 参数
     print(args)
     print('The recpetive field size is', model.receptive_field)
     nParams = sum([p.nelement() for p in model.parameters()])
     print('Number of model parameters is', nParams, flush=True)
 
+    # 
     if args.L1Loss :
         criterion = nn.L1Loss(size_average=False).to(device)
     else :
         criterion = nn.MSELoss(size_average=False).to(device)
     evaluateL2 = nn.MSELoss(size_average=False).to(device)
-    evaluateL1 = nn.L1Loss(size_average=False).to(device)
-
+    evaluateL1 = nn.L1Loss (size_average=False).to(device)
 
     best_val = 10000000
-    optim = Optim(
+    optim = Optim(  # 优化器
         model.parameters(), args.optim, args.lr, args.clip, lr_decay=args.weight_decay
     )
 
-    # At any point you can hit Ctrl + C to break out of training early.
+
+    # At any point you can hit Ctrl+C to break out of training early.
     try :
         print('begin training')
-        for epoch in range(1, args.epochs + 1) :
+
+        for epoch in range(1, args.epochs+1) :
+
             epoch_start_time = time.time()
+            # 
             train_loss = train(Data, Data.train[0], Data.train[1], model, criterion, optim, args.batch_size)
             val_loss, val_rae, val_corr = evaluate(Data, Data.valid[0], Data.valid[1], model, evaluateL2, evaluateL1, args.batch_size)
             print(
