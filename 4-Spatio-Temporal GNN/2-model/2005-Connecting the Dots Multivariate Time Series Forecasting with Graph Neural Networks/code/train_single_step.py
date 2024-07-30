@@ -67,27 +67,25 @@ def train(data, X, Y, model, criterion, optim, batch_size) :
     return total_loss / n_samples
 
 
+# 
 def evaluate(data, X, Y, model, evaluateL2, evaluateL1, batch_size) :
 
-    model.eval()  
+    model.eval()
 
     total_loss = 0
     total_loss_l1 = 0
-
     n_samples = 0
     predict = None
     test = None
 
-    for X, Y in data.get_batches(X, Y, batch_size, False) :  
+    for X, Y in data.get_batches(X, Y, batch_size, False) :
 
-        
         X = torch.unsqueeze(X, dim=1)
         X = X.transpose(2, 3)
-        
 
         with torch.no_grad() :  # 无需BP阶段，节省内存
             output = model(X)
-        output = torch.squeeze(output)  
+        output = torch.squeeze(output)
         if len(output.shape)==1 :
             output = output.unsqueeze(dim=0)
 
@@ -99,15 +97,15 @@ def evaluate(data, X, Y, model, evaluateL2, evaluateL1, batch_size) :
             test = torch.cat((test, Y))
 
         scale = data.scale.expand(output.size(0), data.m)
-        total_loss += evaluateL2(output*scale, Y*scale).item()
+        total_loss    += evaluateL2(output*scale, Y*scale).item()
         total_loss_l1 += evaluateL1(output*scale, Y*scale).item()
-        n_samples += (output.size(0)*data.m)
+        n_samples     += (output.size(0)*data.m)
 
     rse = math.sqrt(total_loss/n_samples) / data.rse
     rae = (total_loss_l1/n_samples) / data.rae
 
     predict = predict.data.cpu().numpy()
-    Ytest = test.data.cpu().numpy()
+    Ytest   = test.data.cpu().numpy()
     sigma_p = (predict).std(axis=0)
     sigma_g = (Ytest).std(axis=0)
     mean_p = predict.mean(axis=0)
@@ -115,6 +113,7 @@ def evaluate(data, X, Y, model, evaluateL2, evaluateL1, batch_size) :
     index = (sigma_g != 0)
     correlation = ((predict-mean_p)*(Ytest-mean_g)).mean(axis=0) / (sigma_p*sigma_g)
     correlation = (correlation[index]).mean()
+
     return rse, rae, correlation
 
 
