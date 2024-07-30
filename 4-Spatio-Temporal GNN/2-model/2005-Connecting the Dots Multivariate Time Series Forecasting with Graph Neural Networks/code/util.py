@@ -115,7 +115,7 @@ class DataLoaderS(object) :
             Y = targets[excerpt]
             X = X.to(self.device)
             Y = Y.to(self.device)
-            yield Variable(X), Variable(Y)  # 返回？
+            yield Variable(X), Variable(Y)  # 周期性返回？
             start_idx += batch_size
 
 

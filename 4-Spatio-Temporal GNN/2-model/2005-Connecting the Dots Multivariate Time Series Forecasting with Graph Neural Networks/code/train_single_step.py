@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 import argparse
-import importlib
+import importlib  # 运行时动态导入模块
 import math
 import numpy as np
 import time
@@ -14,21 +14,29 @@ from util import *
 
 def evaluate(data, X, Y, model, evaluateL2, evaluateL1, batch_size) :
 
-    model.eval()
+    model.eval()  # 评估模式，无反向传播与参数更新，Drop层无随机丢弃，BN层使用全局统一数据归一化
+
     total_loss = 0
     total_loss_l1 = 0
+
     n_samples = 0
     predict = None
     test = None
 
-    for X, Y in data.get_batches(X, Y, batch_size, False) :
+    for X, Y in data.get_batches(X, Y, batch_size, False) :  # 周期性返回一个batch
+
+        # X = 64*12*8
         X = torch.unsqueeze(X, dim=1)  # 在第一维度位置增加一个维度
+        # X = 64*1*12*8
         X = X.transpose(2, 3)  # 第二维度和第三维度位置交换
-        with torch.no_grad() :
-            output = model(X)
-        output = torch.squeeze(output)
+        # X = 64*1*8*12
+
+        with torch.no_grad() :  # 无需BP阶段，节省内存
+            output = model(X)  # 64*1*8
+        output = torch.squeeze(output)  # input中维度大小为1的所有维删除
         if len(output.shape)==1 :
             output = output.unsqueeze(dim=0)
+
         if predict is None :
             predict = output
             test = Y
@@ -141,17 +149,34 @@ args = parser.parse_args()
 device = torch.device(args.device)
 torch.set_num_threads(3)
 
+
+#
 def main() :
 
+    # 读取数据文件，返回一个数据类的实例
     Data = DataLoaderS(args.data, 0.6, 0.2, device, args.seq_in_len, args.horizon, args.normalize)
 
-    model = gtnet(args.gcn_true, args.buildA_true, args.gcn_depth, args.num_nodes, 
-                  device, dropout=args.dropout, subgraph_size=args.subgraph_size, 
-                  node_dim=args.node_dim, dilation_exponential=args.dilation_exponential, 
-                  conv_channels=args.conv_channels, residual_channels=args.residual_channels, 
-                  skip_channels=args.skip_channels, end_channels= args.end_channels, 
-                  seq_length=args.seq_in_len, in_dim=args.in_dim, out_dim=args.seq_out_len, 
-                  layers=args.layers, propalpha=args.propalpha, tanhalpha=args.tanhalpha, layer_norm_affline=False)
+    # 模型类的实例
+    model = gtnet(args.gcn_true, 
+                  args.buildA_true, 
+                  args.gcn_depth, 
+                  args.num_nodes, 
+                  device, 
+                  dropout=args.dropout, 
+                  subgraph_size=args.subgraph_size, 
+                  node_dim=args.node_dim, 
+                  dilation_exponential=args.dilation_exponential, 
+                  conv_channels=args.conv_channels, 
+                  residual_channels=args.residual_channels, 
+                  skip_channels=args.skip_channels, 
+                  end_channels= args.end_channels, 
+                  seq_length=args.seq_in_len, 
+                  in_dim=args.in_dim, 
+                  out_dim=args.seq_out_len, 
+                  layers=args.layers, 
+                  propalpha=args.propalpha, 
+                  tanhalpha=args.tanhalpha, 
+                  layer_norm_affline=False)
     model = model.to(device)
 
     print(args)
@@ -208,29 +233,41 @@ def main() :
     return vtest_acc, vtest_rae, vtest_corr, test_acc, test_rae, test_corr
 
 
+# 
 if __name__ == "__main__" :
-    vacc = []
-    vrae = []
+
+    vacc  = []
+    vrae  = []
     vcorr = []
-    acc = []
-    rae = []
-    corr = []
+
+    acc  = []  # Accuracy
+    rae  = []  # Relative Absolute Error
+    corr = []  # Correlation
+
+    #
     for i in range(10) :
+
+        # 
         val_acc, val_rae, val_corr, test_acc, test_rae, test_corr = main()
-        vacc.append(val_acc)
-        vrae.append(val_rae)
+
+        vacc .append(val_acc)
+        vrae .append(val_rae)
         vcorr.append(val_corr)
-        acc.append(test_acc)
-        rae.append(test_rae)
+
+        acc .append(test_acc)
+        rae .append(test_rae)
         corr.append(test_corr)
+
     print('\n\n')
     print('10 runs average')
+
     print('\n\n')
     print("valid\trse\trae\tcorr")
     print("mean\t{:5.4f}\t{:5.4f}\t{:5.4f}".format(np.mean(vacc), np.mean(vrae), np.mean(vcorr)))
-    print("std\t{:5.4f}\t{:5.4f}\t{:5.4f}".format(np.std(vacc), np.std(vrae), np.std(vcorr)))
+    print("std \t{:5.4f}\t{:5.4f}\t{:5.4f}".format(np.std(vacc) , np.std(vrae) , np.std(vcorr)))
+
     print('\n\n')
     print("test\trse\trae\tcorr")
     print("mean\t{:5.4f}\t{:5.4f}\t{:5.4f}".format(np.mean(acc), np.mean(rae), np.mean(corr)))
-    print("std\t{:5.4f}\t{:5.4f}\t{:5.4f}".format(np.std(acc), np.std(rae), np.std(corr)))
+    print("std \t{:5.4f}\t{:5.4f}\t{:5.4f}".format(np.std(acc) , np.std(rae) , np.std(corr)))
 
