@@ -1,0 +1,186 @@
+Perform shuffle on the dataset
+Namespace(batch_size=64, data='data//PEMS08', device='cuda:0', dropout=0.1, epochs=500, es_patience=100, expid=1, input_dim=3, learning_rate=0.001, print_every=50, save='./logs/2024-08-05-11:21:37-', weight_decay=0.0001)
+Ranger optimizer loaded. 
+Gradient Centralization usage = True
+GC applied to both conv and fc layers
+The number of parameters: 4423029
+STIDGCN(
+  (Temb): TemporalEmbedding()
+  (start_conv): Conv2d(3, 96, kernel_size=(1, 1), stride=(1, 1))
+  (tree): IDGCN_Tree(
+    (IDGCN1): IDGCN(
+      (split): Splitting()
+      (conv1): Sequential(
+        (0): ReplicationPad2d((3, 3, 0, 0))
+        (1): Conv2d(192, 192, kernel_size=(1, 5), stride=(1, 1))
+        (2): LeakyReLU(negative_slope=0.01, inplace=True)
+        (3): Dropout(p=0.1, inplace=False)
+        (4): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1))
+        (5): Tanh()
+      )
+      (conv2): Sequential(
+        (0): ReplicationPad2d((3, 3, 0, 0))
+        (1): Conv2d(192, 192, kernel_size=(1, 5), stride=(1, 1))
+        (2): LeakyReLU(negative_slope=0.01, inplace=True)
+        (3): Dropout(p=0.1, inplace=False)
+        (4): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1))
+        (5): Tanh()
+      )
+      (conv3): Sequential(
+        (0): ReplicationPad2d((3, 3, 0, 0))
+        (1): Conv2d(192, 192, kernel_size=(1, 5), stride=(1, 1))
+        (2): LeakyReLU(negative_slope=0.01, inplace=True)
+        (3): Dropout(p=0.1, inplace=False)
+        (4): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1))
+        (5): Tanh()
+      )
+      (conv4): Sequential(
+        (0): ReplicationPad2d((3, 3, 0, 0))
+        (1): Conv2d(192, 192, kernel_size=(1, 5), stride=(1, 1))
+        (2): LeakyReLU(negative_slope=0.01, inplace=True)
+        (3): Dropout(p=0.1, inplace=False)
+        (4): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1))
+        (5): Tanh()
+      )
+      (dgcn): DGCN(
+        (conv): Conv2d(192, 192, kernel_size=(1, 1), stride=(1, 1))
+        (generator): Graph_Generator(
+          (fc): Linear(in_features=2, out_features=1, bias=True)
+        )
+        (gcn): Diffusion_GCN(
+          (conv): Conv2d(192, 192, kernel_size=(1, 1), stride=(1, 1))
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+    (IDGCN2): IDGCN(
+      (split): Splitting()
+      (conv1): Sequential(
+        (0): ReplicationPad2d((3, 3, 0, 0))
+        (1): Conv2d(192, 192, kernel_size=(1, 5), stride=(1, 1))
+        (2): LeakyReLU(negative_slope=0.01, inplace=True)
+        (3): Dropout(p=0.1, inplace=False)
+        (4): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1))
+        (5): Tanh()
+      )
+      (conv2): Sequential(
+        (0): ReplicationPad2d((3, 3, 0, 0))
+        (1): Conv2d(192, 192, kernel_size=(1, 5), stride=(1, 1))
+        (2): LeakyReLU(negative_slope=0.01, inplace=True)
+        (3): Dropout(p=0.1, inplace=False)
+        (4): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1))
+        (5): Tanh()
+      )
+      (conv3): Sequential(
+        (0): ReplicationPad2d((3, 3, 0, 0))
+        (1): Conv2d(192, 192, kernel_size=(1, 5), stride=(1, 1))
+        (2): LeakyReLU(negative_slope=0.01, inplace=True)
+        (3): Dropout(p=0.1, inplace=False)
+        (4): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1))
+        (5): Tanh()
+      )
+      (conv4): Sequential(
+        (0): ReplicationPad2d((3, 3, 0, 0))
+        (1): Conv2d(192, 192, kernel_size=(1, 5), stride=(1, 1))
+        (2): LeakyReLU(negative_slope=0.01, inplace=True)
+        (3): Dropout(p=0.1, inplace=False)
+        (4): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1))
+        (5): Tanh()
+      )
+      (dgcn): DGCN(
+        (conv): Conv2d(192, 192, kernel_size=(1, 1), stride=(1, 1))
+        (generator): Graph_Generator(
+          (fc): Linear(in_features=2, out_features=1, bias=True)
+        )
+        (gcn): Diffusion_GCN(
+          (conv): Conv2d(192, 192, kernel_size=(1, 1), stride=(1, 1))
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+    (IDGCN3): IDGCN(
+      (split): Splitting()
+      (conv1): Sequential(
+        (0): ReplicationPad2d((3, 3, 0, 0))
+        (1): Conv2d(192, 192, kernel_size=(1, 5), stride=(1, 1))
+        (2): LeakyReLU(negative_slope=0.01, inplace=True)
+        (3): Dropout(p=0.1, inplace=False)
+        (4): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1))
+        (5): Tanh()
+      )
+      (conv2): Sequential(
+        (0): ReplicationPad2d((3, 3, 0, 0))
+        (1): Conv2d(192, 192, kernel_size=(1, 5), stride=(1, 1))
+        (2): LeakyReLU(negative_slope=0.01, inplace=True)
+        (3): Dropout(p=0.1, inplace=False)
+        (4): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1))
+        (5): Tanh()
+      )
+      (conv3): Sequential(
+        (0): ReplicationPad2d((3, 3, 0, 0))
+        (1): Conv2d(192, 192, kernel_size=(1, 5), stride=(1, 1))
+        (2): LeakyReLU(negative_slope=0.01, inplace=True)
+        (3): Dropout(p=0.1, inplace=False)
+        (4): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1))
+        (5): Tanh()
+      )
+      (conv4): Sequential(
+        (0): ReplicationPad2d((3, 3, 0, 0))
+        (1): Conv2d(192, 192, kernel_size=(1, 5), stride=(1, 1))
+        (2): LeakyReLU(negative_slope=0.01, inplace=True)
+        (3): Dropout(p=0.1, inplace=False)
+        (4): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1))
+        (5): Tanh()
+      )
+      (dgcn): DGCN(
+        (conv): Conv2d(192, 192, kernel_size=(1, 1), stride=(1, 1))
+        (generator): Graph_Generator(
+          (fc): Linear(in_features=2, out_features=1, bias=True)
+        )
+        (gcn): Diffusion_GCN(
+          (conv): Conv2d(192, 192, kernel_size=(1, 1), stride=(1, 1))
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+  )
+  (glu): GLU(
+    (conv1): Conv2d(192, 192, kernel_size=(1, 1), stride=(1, 1))
+    (conv2): Conv2d(192, 192, kernel_size=(1, 1), stride=(1, 1))
+    (conv3): Conv2d(192, 192, kernel_size=(1, 1), stride=(1, 1))
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (regression_layer): Conv2d(192, 12, kernel_size=(1, 12), stride=(1, 1))
+)
+start training...
+Iter: 000, Train Loss: 118.7981, Train RMSE: 145.8948, Train MAPE: 2.0573, Train WMAPE: 0.4951
+Iter: 050, Train Loss: 42.0179, Train RMSE: 55.9126, Train MAPE: 0.6487, Train WMAPE: 0.1795
+Iter: 100, Train Loss: 28.8861, Train RMSE: 43.3442, Train MAPE: 0.2428, Train WMAPE: 0.1182
+Iter: 150, Train Loss: 25.5290, Train RMSE: 38.7028, Train MAPE: 0.2084, Train WMAPE: 0.1110
+Epoch: 001, Training Time: 29.1785 secs
+Epoch: 001, Inference Time: 2.7584 secs
+Epoch: 001, Train Loss: 47.6109, Train RMSE: 63.4998, Train MAPE: 0.7343, Train WMAPE: 0.2071, 
+Epoch: 001, Valid Loss: 24.8415, Valid RMSE: 38.2098, Valid MAPE: 0.1869, Valid WMAPE: 0.1059
+###Update tasks appear###
+Updating! Valid Loss: 24.841494015284947, epoch:  1
+Iter: 000, Train Loss: 24.5582, Train RMSE: 37.9389, Train MAPE: 0.1739, Train WMAPE: 0.1023
+Iter: 050, Train Loss: 22.3956, Train RMSE: 33.1739, Train MAPE: 0.1754, Train WMAPE: 0.0957
+Iter: 100, Train Loss: 23.5105, Train RMSE: 35.9766, Train MAPE: 0.1776, Train WMAPE: 0.0962
+Iter: 150, Train Loss: 21.2199, Train RMSE: 33.4655, Train MAPE: 0.1743, Train WMAPE: 0.0922
+Epoch: 002, Training Time: 28.8220 secs
+Epoch: 002, Inference Time: 2.7623 secs
+Epoch: 002, Train Loss: 22.8248, Train RMSE: 35.0893, Train MAPE: 0.1902, Train WMAPE: 0.0990, 
+Epoch: 002, Valid Loss: 21.6246, Valid RMSE: 33.8830, Valid MAPE: 0.1627, Valid WMAPE: 0.0922
+###Update tasks appear###
+Updating! Valid Loss: 21.62456018584115, epoch:  2
+Iter: 000, Train Loss: 21.4261, Train RMSE: 33.6297, Train MAPE: 0.1566, Train WMAPE: 0.0893
+Iter: 050, Train Loss: 20.5635, Train RMSE: 31.1609, Train MAPE: 0.1622, Train WMAPE: 0.0879
+Iter: 100, Train Loss: 20.7760, Train RMSE: 32.3013, Train MAPE: 0.1489, Train WMAPE: 0.0850
+Iter: 150, Train Loss: 19.3644, Train RMSE: 30.7195, Train MAPE: 0.1537, Train WMAPE: 0.0842
+Epoch: 003, Training Time: 28.8112 secs
+Epoch: 003, Inference Time: 2.7595 secs
+Epoch: 003, Train Loss: 20.4386, Train RMSE: 31.9445, Train MAPE: 0.1684, Train WMAPE: 0.0886, 
+Epoch: 003, Valid Loss: 19.6589, Valid RMSE: 30.9639, Valid MAPE: 0.1413, Valid WMAPE: 0.0838
+###Update tasks appear###
+Updating! Valid Loss: 19.658894879477366, epoch:  3
+Iter: 000, Train Loss: 20.0267, Train RMSE: 31.4063, Train MAPE: 0.1348, Train WMAPE: 0.0835
