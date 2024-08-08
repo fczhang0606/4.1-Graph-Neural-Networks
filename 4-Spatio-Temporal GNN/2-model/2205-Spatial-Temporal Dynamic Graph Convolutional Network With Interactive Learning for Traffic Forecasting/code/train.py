@@ -181,6 +181,7 @@ def main() :
     device = torch.device(args.device)
 
     dataloader = util.load_dataset(args.data, args.batch_size, args.batch_size, args.batch_size)
+
     scaler = dataloader["scaler"]
 
     loss     = 9999999
