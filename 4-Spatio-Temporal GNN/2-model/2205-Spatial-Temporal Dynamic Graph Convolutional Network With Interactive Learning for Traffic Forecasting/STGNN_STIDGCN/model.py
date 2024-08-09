@@ -33,7 +33,7 @@ class GLU(nn.Module) :  # 常规GLU
 class TemporalEmbedding(nn.Module) :
 
     # self.Temb = TemporalEmbedding(channels, day_granularity)
-    def __init__(self, time, features) :
+    def __init__(self, day_granularity, features) :
 
         super(TemporalEmbedding, self).__init__()
 
