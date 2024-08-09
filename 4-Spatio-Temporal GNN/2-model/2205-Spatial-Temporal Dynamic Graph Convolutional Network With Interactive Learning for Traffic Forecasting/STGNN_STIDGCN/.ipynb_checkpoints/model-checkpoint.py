@@ -29,38 +29,43 @@ class GLU(nn.Module) :  # 常规GLU
         return out
 
 
-# input: [64, 12, 170, 3]
+# 
 class TemporalEmbedding(nn.Module) :
 
     # self.Temb = TemporalEmbedding(channels, day_granularity)
-    def __init__(self, day_granularity, features) :
+    def __init__(self, channels, day_granularity) :  # 96 + 288
 
         super(TemporalEmbedding, self).__init__()
 
-        self.day_granularity = day_granularity  # 时刻step
-        self.time_day = nn.Parameter(torch.empty(day_granularity, features))  # array[][]
+        self.day_granularity = day_granularity  # 每天的timestamp的数量
+
+        # 每个点每天的特征
+        self.time_day  = nn.Parameter(torch.empty(day_granularity, channels))  # array[288][96]
         nn.init.xavier_uniform_(self.time_day)  # 均匀分布
 
-        self.time_week = nn.Parameter(torch.empty(7, features))
+        self.time_week = nn.Parameter(torch.empty(7, channels))
         nn.init.xavier_uniform_(self.time_week)
 
 
-    def forward(self, x) :  # 原理？
+    def forward(self, x) :
 
-        # print(x.shape)  # torch.Size([64, 12, 170, 3])
-        day_emb  = x[..., 1]  # 这是什么操作？
+        # [64, 12, 170, 3]
+
+        day_emb  = x[..., 1]  # 按天算速度
         # print(day_emb.shape)  # torch.Size([64, 12, 170])
-        time_day = self.time_day[(day_emb[:, :, :]*self.day_granularity).type(torch.LongTensor)]
+        time_day = self.time_day[(day_emb[:, :, :]*self.day_granularity).type(torch.LongTensor)]  # ???
+        # print(self.time_day.shape)  # torch.Size([288, 96])
+        # print(time_day.shape)  # torch.Size([64, 12, 170, 96])
         time_day = time_day.transpose(1, 2).contiguous()
 
-        week_emb  = x[..., 2]
+        week_emb  = x[..., 2]  # 按周算占有率
         time_week = self.time_week[(week_emb[:, :, :]).type(torch.LongTensor)]
         time_week = time_week.transpose(1, 2).contiguous()
 
         tem_emb = time_day + time_week
 
         tem_emb = tem_emb.permute(0, 3, 1, 2)
-        print(tem_emb.shape)  # torch.Size([64, 96, 170, 12])
+        # print(tem_emb.shape)  # torch.Size([64, 96, 170, 12])
 
         return tem_emb
 
@@ -280,7 +285,7 @@ class IDGCN(nn.Module) :
 class IDGCN_Tree(nn.Module) :
 
     def __init__(
-        self, device, channels=64, diffusion_step=1, num_nodes=170, dropout=0.1
+        self, device, num_nodes=170, channels=64, diffusion_step=1, dropout=0.1
     ) :
         super().__init__()
 
@@ -348,29 +353,29 @@ class IDGCN_Tree(nn.Module) :
 # 
 class STIDGCN(nn.Module) :
 
-    def __init__(
+    def __init__(  # 170*3 + 96 + 288
         self, device, num_nodes, input_dim, channels, day_granularity, dropout=0.1
     ) :
 
         super().__init__()
 
-        self.device = device
-        self.num_nodes = num_nodes
-        self.output_len = 12
-        diffusion_step = 1
+        self.device     = device
+        self.num_nodes  = num_nodes
+        diffusion_step  = 1
+        self.output_len = 12  # horizon
 
         self.Temb = TemporalEmbedding(channels, day_granularity)
 
-        self.start_conv = nn.Conv2d(
+        self.start_conv = nn.Conv2d(  # 3~96
             in_channels=input_dim, out_channels=channels, kernel_size=(1, 1)
         )
 
         self.tree = IDGCN_Tree(
             device=device, 
+            num_nodes=self.num_nodes, 
             channels=channels*2, 
             diffusion_step=diffusion_step, 
-            num_nodes=self.num_nodes, 
-            dropout=dropout, 
+            dropout=dropout
         )
 
         self.glu = GLU(channels*2, dropout)
@@ -386,11 +391,12 @@ class STIDGCN(nn.Module) :
 
     def forward(self, input) :
 
-        x = input
+        x = input  # [64, 3, 170, 12]
 
         # Encoder
+
         # Data Embedding
-        time_emb = self.Temb(input.permute(0, 3, 2, 1))
+        time_emb = self.Temb(input.permute(0, 3, 2, 1))  # [64, 12, 170, 3]
         x = torch.cat([self.start_conv(x)] + [time_emb], dim=1)
 
         # IDGCN_Tree

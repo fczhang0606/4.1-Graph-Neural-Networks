@@ -39,22 +39,23 @@ class DataLoader(object) :
         self.ys = ys
 
 
-    def get_iterator(self) :
+    def get_iterator(self) :  # 调用一次，返回168批
 
         self.current_ind = 0  # 批号
 
-        def _wrapper() :
+        def _wrapper() :  # 内嵌的装饰器函数，拓展功能
 
             while self.current_ind < self.num_batch :
 
-                start_ind = self.batch_size*self.current_ind  # ？
+                start_ind = self.batch_size*self.current_ind
                 end_ind = min(self.size, self.batch_size*(self.current_ind+1))
                 x_i = self.xs[start_ind:end_ind, ...]
                 y_i = self.ys[start_ind:end_ind, ...]
-                yield (x_i, y_i)
+                yield (x_i, y_i)  # 类似return，节约内存
+
                 self.current_ind += 1
 
-        return _wrapper()
+        return _wrapper()  # 返回函数
 
 
 # 
